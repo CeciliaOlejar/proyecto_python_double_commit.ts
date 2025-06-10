@@ -19,7 +19,7 @@ class Herramineta():
         '''
     
     @classmethod
-    def listar_herramienta(cls):
+    def listar_herramientas(cls):
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
