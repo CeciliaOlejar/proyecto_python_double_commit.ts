@@ -27,6 +27,7 @@ class Herramineta:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
+                    # Seleccionamos las herramientas de la base de datos
                     cursor.execute(cls._SELECCIONAR_HERRAMIENTAS)
                     registros = cursor.fetchall()
                     herramientas = []
