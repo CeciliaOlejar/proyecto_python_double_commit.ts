@@ -2,12 +2,12 @@ from db.Conexion import Conexion
 from logger.logger_base import log
 
 
-class Herramineta:
+class Herramienta:
 
     _SELECCIONAR_HERRAMIENTAS = "SELECT * FROM herramienta ORDER BY id_herramienta"
     _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, descripcion, precio_por_dia, disponible) VALUES (%s,%s,%s,%s)"
     _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s descripcion=%s precio_por_dia=%s disponible=%s"
-    _ELIMINAR_HERRAMINETA = "DELETE FROM herramienta WHERE id_herramienta=%s"
+    _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
     def __init__(self, nombre, descripcion, precio_por_dia, disponible=True):
         self._nombre = nombre
