@@ -29,11 +29,18 @@ git clone https://github.com/tu_usuario/nombre-del-repo.git
 cd nombre-del-repo
 ```
 
-2. Crear y activar el entorno virtual
+2. Crear el entorno virtual
+```bash
+python -m venv .venv # Windows
 
+python3 -m venv .venv # Linux / MacOs
+```
+- Activar el entorno virtual
 ```bash
 python -m venv venv
 source venv/Scripts/activate  # En Windows
+
+source .venv/bin/activate # Linux / MacOS
 ```
 
 3. Instalar dependencias
