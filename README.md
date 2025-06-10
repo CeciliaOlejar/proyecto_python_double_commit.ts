@@ -55,7 +55,14 @@ proyecto/
 │   └── herramienta.py
 ├── alquiler/
 │   └── gestion_alquiler.py
+├── styles/
+│   └── Menu.py
 ├── requirements.txt
 └── README.md
 ```
 
+---
+
+<div align="center">
+   AlquileMeLo • doubleCommit.ts 2025
+</div>
