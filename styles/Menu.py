@@ -15,7 +15,7 @@ class Menu:
             time.sleep(delay)
 
     @staticmethod
-    def ingreso():
+    def principal():
         text = f"""
         {Fore.GREEN}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
