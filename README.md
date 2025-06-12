@@ -18,6 +18,7 @@ Aplicación desarrollada en Python para gestionar un catálogo de herramientas d
 - Python 3.11
 - PostgreSQL (base de datos)
 - `psycopg2` (conexión a la base de datos)
+- `cohere` IA (Asistente inteligencia artificial)
 - Interfaz por consola (CLI)
 
 ## 🔧 Instalación
