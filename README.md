@@ -26,8 +26,8 @@ Aplicación desarrollada en Python para gestionar un catálogo de herramientas d
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu_usuario/nombre-del-repo.git
-cd nombre-del-repo
+git clone https://github.com/PowerSystem2024/proyecto_python_double_commit.ts.git
+cd proyecto_python_double_commit
 ```
 
 2. Crear el entorno virtual
