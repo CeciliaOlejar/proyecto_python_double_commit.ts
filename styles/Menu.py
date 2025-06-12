@@ -62,3 +62,21 @@ class Menu:
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """
         Menu.maquina_de_escribir(text)
+    
+    def asistente(username):
+        text = f"""{Fore.YELLOW}
+        ╔══════════════════════════════════════════════════════╗
+        ║                                                      ║
+        ║   🌟 ¡BIENVENIDO A TU ASISTENTE VIRTUAL! 🌟          ║
+        ║                                                      ║
+        ╠══════════════════════════════════════════════════════╣
+        ║                                                      ║
+        ║   👋 ¡Hola, {username}!                                   ║
+        ║                                                      ║
+        ║   💬 Puedes preguntarme lo que quieras               ║
+        ║   💡 Estoy aquí para ayudarte                        ║
+        ║   🚪 Escribe 'salir' para terminar                   ║
+        ║                                                      ║
+        ╚══════════════════════════════════════════════════════╝
+        {Style.RESET_ALL}"""
+        Menu.maquina_de_escribir(text)

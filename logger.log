@@ -1,1 +1,17 @@
-12:23:16 AM:DEBUG [conexion.py:26] Conexión exitosa: <connection object at 0x0000026AA9825CF0; dsn: 'user=postgres password=xxx dbname=contrurent host=127.0.0.1 port=5432', closed: 0>
+12:23:16 AM:DEBUG [conexion.py:26] Conexiï¿½n exitosa: <connection object at 0x0000026AA9825CF0; dsn: 'user=postgres password=xxx dbname=contrurent host=127.0.0.1 port=5432', closed: 0>
+
+01:37:52 AM:DEBUG [_trace.py:47] connect_tcp.started host='api.cohere.com' port=443 local_address=None timeout=300 socket_options=None
+01:37:52 AM:DEBUG [_trace.py:47] connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D990076B50>
+01:37:52 AM:DEBUG [_trace.py:47] start_tls.started ssl_context=<ssl.SSLContext object at 0x000001D98FFF23C0> server_hostname='api.cohere.com' timeout=300
+01:37:52 AM:DEBUG [_trace.py:47] start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D990076FD0>
+01:37:52 AM:DEBUG [_trace.py:47] send_request_headers.started request=<Request [b'POST']>
+01:37:52 AM:DEBUG [_trace.py:47] send_request_headers.complete
+01:37:52 AM:DEBUG [_trace.py:47] send_request_body.started request=<Request [b'POST']>
+01:37:52 AM:DEBUG [_trace.py:47] send_request_body.complete
+01:37:52 AM:DEBUG [_trace.py:47] receive_response_headers.started request=<Request [b'POST']>
+01:38:01 AM:DEBUG [_trace.py:47] receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'access-control-expose-headers', b'X-Debug-Trace-ID'), (b'cache-control', b'no-cache, no-store, no-transform, must-revalidate, private, max-age=0'), (b'content-type', b'application/json'), (b'expires', b'Thu, 01 Jan 1970 00:00:00 UTC'), (b'num_chars', b'3191'), (b'num_tokens', b'574'), (b'pragma', b'no-cache'), (b'vary', b'Origin'), (b'x-accel-expires', b'0'), (b'x-debug-trace-id', b'066df6d63cf7d8163cd8f9ea998c8288'), (b'x-endpoint-monthly-call-limit', b'1000'), (b'x-trial-endpoint-call-limit', b'40'), (b'x-trial-endpoint-call-remaining', b'39'), (b'date', b'Thu, 12 Jun 2025 04:38:02 GMT'), (b'x-envoy-upstream-service-time', b'8522'), (b'server', b'envoy'), (b'Via', b'1.1 google'), (b'Alt-Svc', b'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'), (b'Transfer-Encoding', b'chunked')])
+01:38:01 AM:INFO [_client.py:1025] HTTP Request: POST https://api.cohere.com/v2/chat "HTTP/1.1 200 OK"
+01:38:01 AM:DEBUG [_trace.py:47] receive_response_body.started request=<Request [b'POST']>
+01:38:01 AM:DEBUG [_trace.py:47] receive_response_body.complete
+01:38:01 AM:DEBUG [_trace.py:47] response_closed.started
+01:38:01 AM:DEBUG [_trace.py:47] response_closed.complete
