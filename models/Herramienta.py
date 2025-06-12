@@ -1,5 +1,4 @@
 from db.conexion import Conexion
-from logger.logger_base import log
 
 
 class Herramienta:
@@ -35,26 +34,41 @@ class Herramienta:
                         herramientas.append(registro)
                     return herramientas
         except Exception as e:
-            log.error(f"Error al listar herramientas: {e}")
+            print(f"Error al listar herramientas: {e}")
             return []
 
     @classmethod
-    def agregar_herramienta(cls, nombre, descripcion, precio_por_dia, disponible=True) -> int:
+    def agregar(cls, nombre, descripcion, precio_por_dia, disponible=True) -> int:
+        '''Agregar herramineta a la base de datos'''
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
                     # Verificar si la herramienta ya existe
                     cursor.execute("SELECT * FROM herramienta WHERE nombre=%s", (nombre,))
                     if cursor.fetchone() is not None:
-                        log.error(f"La herramienta '{nombre}' ya existe.")
+                        print(f"La herramienta '{nombre}' ya existe.")
                         return
                     # Insertar nueva herramienta
-                    log.info(f"Agregando herramienta: {nombre}")
+                    print(f"Agregando herramienta: {nombre}")
                     if not nombre or precio_por_dia <= 0:
-                        log.error("Datos inválidos para agregar herramienta.")
+                        print("Datos inválidos para agregar herramienta.")
                         return
                     cursor.execute(cls._INSERTAR_HERRAMIENTA, (nombre, descripcion, precio_por_dia, disponible))
                     return cursor.lastrowid
         except Exception as e:
-            log.error(f"Error al agregar herramienta: {e}")
+            print(f"Error al agregar herramienta: {e}")
             
+    @classmethod
+    def eliminar(cls, id_herramienta):
+        try:
+            with Conexion.obtener_conexion():
+                with Conexion.obtener_cursor() as cursor:
+                    cursor.execute("SELECT nombre FROM herramienta WHERE id_herramienta=%s", (id_herramienta,))
+                    id, nombre = cursor.fetchone()
+                    if not id:
+                        print(f"ID de herramienta inexistente {id_herramienta}")
+                        return
+                    cursor.execute(cls._ELIMINAR_HERRAMIENTA, (id_herramienta,))
+                    return cursor.rowcount, nombre
+        except Exception as e:
+            print(f"Ocurrió un error {e}")

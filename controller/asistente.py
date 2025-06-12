@@ -4,7 +4,7 @@ from styles.Menu import Menu
 import re
 
 init()
-API_KEY = "tu_api_key_perro"
+API_KEY = "<<tu_api_key_perrito_rabioso>>"
 
 class Chat:
     @staticmethod
