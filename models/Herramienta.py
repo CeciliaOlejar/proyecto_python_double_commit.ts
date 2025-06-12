@@ -1,4 +1,4 @@
-from db.Conexion import Conexion
+from db.conexion import Conexion
 from logger.logger_base import log
 
 
@@ -57,3 +57,4 @@ class Herramienta:
                     return cursor.lastrowid
         except Exception as e:
             log.error(f"Error al agregar herramienta: {e}")
+            
