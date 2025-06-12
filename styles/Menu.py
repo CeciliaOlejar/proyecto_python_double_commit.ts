@@ -5,10 +5,9 @@ import getpass
 
 init()
 
-
 class Menu:
     @staticmethod
-    def maquina_de_escribir(text, delay=0.006):
+    def maquina_de_escribir(text, delay=0.003):
         for char in text:
             sys.stdout.write(char)
             sys.stdout.flush()
@@ -24,7 +23,9 @@ class Menu:
         ╠════════════════════════════════════════════════════════════╣
         ║  1. Iniciar sesión                                         ║
         ║  2. Registrarse                                            ║
-        ║  3. Salir                                                  ║
+        ║  3. Explorar herramientas disponibles                      ║
+        ║  4. Preguntar a Kai (asistente IA)                         ║
+        ║  5. Salir                                                  ║
         ╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Selecciona una opción (1-3): {Style.RESET_ALL}
         """

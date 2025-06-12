@@ -1,5 +1,4 @@
 import psycopg2 as bd
-from logger.logger_base import log
 import sys
 
 
@@ -23,10 +22,10 @@ class Conexion:
                     port=cls._PORT,
                     database=cls._DATABASE,
                 )
-                log.debug(f"Conexión exitosa: {cls._conexion}")
+                print(f"Conexión exitosa: {cls._conexion}")
                 return cls._conexion
             except Exception as e:
-                log.error(f"Ocurrió un error: {e}")
+                print(f"Ocurrió un error: {e}")
                 sys.exit()
         else:
             return cls._conexion
@@ -36,10 +35,10 @@ class Conexion:
         if cls._cursor is None:
             try:
                 cls._cursor = cls.obtener_conexion().cursor()
-                log.debug(f"Se abrió correctamente el cursor: {cls._cursor}")
+                print(f"Se abrió correctamente el cursor: {cls._cursor}")
                 return cls._cursor
             except Exception as e:
-                log.error(f"Ocurrió un error: {e}")
+                print(f"Ocurrió un error: {e}")
                 sys.exit()
         else:
             return cls._cursor
