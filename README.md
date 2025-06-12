@@ -72,5 +72,5 @@ proyecto/
 ---
 
 <div align="center">
-   AlquileMeLo • doubleCommit.ts 2025
+   ContruRent • doubleCommit.ts 2025
 </div>
