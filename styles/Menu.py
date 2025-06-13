@@ -27,10 +27,14 @@ class Menu:
         ║  4. Preguntar a Kai (asistente IA)                         ║
         ║  5. Salir                                                  ║
         ╚════════════════════════════════════════════════════════════╝
-        {Fore.YELLOW}Selecciona una opción (1-3): {Style.RESET_ALL}
         """
         Menu.maquina_de_escribir(text)
-        
+    
+    @staticmethod
+    def opcion() -> int:
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
+        return int(opcion)
+    
     @staticmethod
     def registro():
         text = f"""
@@ -42,13 +46,15 @@ class Menu:
         Menu.maquina_de_escribir(text)
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Usuario: {Style.RESET_ALL}""", end="")
         username = input()
-        print(f"""{Fore.BLUE}        ║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
+        email = input()
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
         password = getpass.getpass("")
         print(f"""{Fore.BLUE}        ╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """)
-
-        return username, password
+        registro = { username, password, email, password }
+        return registro
 
     @staticmethod
     def login():

@@ -63,3 +63,18 @@ class Herramienta:
                     return cursor.lastrowid
         except Exception as e:
             print(f"Error al agregar herramienta: {e}")
+            
+    @classmethod
+    def eliminar(cls, id_herramienta):
+        try:
+            with Conexion.obtener_conexion():
+                with Conexion.obtener_cursor() as cursor:
+                    cursor.execute("SELECT nombre FROM herramienta WHERE id_herramienta=%s", (id_herramienta,))
+                    id, nombre = cursor.fetchone()
+                    if not id:
+                        print(f"ID de herramienta inexistente {id_herramienta}")
+                        return
+                    cursor.execute(cls._ELIMINAR_HERRAMIENTA, (id_herramienta,))
+                    return cursor.rowcount, nombre
+        except Exception as e:
+            print(f"Ocurrió un error {e}")
