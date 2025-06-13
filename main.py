@@ -1,6 +1,7 @@
 from db.conexion import Conexion
 from styles.Menu import Menu
 from controller.asistente import Chat
+from models.Herramienta import Herramienta
 
 if __name__ == "__main__":
     try:
@@ -11,8 +12,13 @@ if __name__ == "__main__":
                 opcion = int(input("Elige una opción del menú: "))
                 if opcion == 1:
                     Menu.login()
+                elif opcion == 3:
+                    print("Explorando herramientas disponibles...")
+                    Herramienta.listar_herramientas()
                 elif opcion == 4:
-                    pregunta = input("Pregunta lo que quieras (escribe 'salir' para terminar): ")
+                    pregunta = input(
+                        "Pregunta lo que quieras (escribe 'salir' para terminar): "
+                    )
                     if pregunta.lower() == "salir":
                         print("Saliendo del chat")
                         break
@@ -24,6 +30,6 @@ if __name__ == "__main__":
                     print("Opción no válida. Intenta de nuevo.")
             except Exception as e:
                 print(f"Error a ingresar la opción: {opcion}")
-            
+
     except Exception as e:
         print(f"Ocurrió un error: {e}")

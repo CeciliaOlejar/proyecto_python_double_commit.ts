@@ -1,5 +1,4 @@
 from db.conexion import Conexion
-from logger.logger_base import log
 
 
 class Herramienta:
@@ -9,13 +8,13 @@ class Herramienta:
     _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s descripcion=%s precio_por_dia=%s disponible=%s"
     _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
-    def __init__(self, nombre, descripcion, precio_por_dia, disponible=True):
+    def _init_(self, nombre, descripcion, precio_por_dia, disponible=True):
         self._nombre = nombre
         self._descripcion = descripcion
         self._precio_por_dia = precio_por_dia
         self._disponible = disponible
 
-    def __str__(self):
+    def _str_(self):
         return f"""
         Herramienta: {self._nombre} - ${self._precio_por_dia}/día
         Descripción: {self._descripcion}
@@ -35,26 +34,32 @@ class Herramienta:
                         herramientas.append(registro)
                     return herramientas
         except Exception as e:
-            log.error(f"Error al listar herramientas: {e}")
+            print(f"Error al listar herramientas: {e}")
             return []
 
     @classmethod
-    def agregar_herramienta(cls, nombre, descripcion, precio_por_dia, disponible=True) -> int:
+    def agregar_herramienta(
+        cls, nombre, descripcion, precio_por_dia, disponible=True
+    ) -> int:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
                     # Verificar si la herramienta ya existe
-                    cursor.execute("SELECT * FROM herramienta WHERE nombre=%s", (nombre,))
+                    cursor.execute(
+                        "SELECT * FROM herramienta WHERE nombre=%s", (nombre,)
+                    )
                     if cursor.fetchone() is not None:
-                        log.error(f"La herramienta '{nombre}' ya existe.")
+                        print(f"La herramienta '{nombre}' ya existe.")
                         return
                     # Insertar nueva herramienta
-                    log.info(f"Agregando herramienta: {nombre}")
+                    print(f"Agregando herramienta: {nombre}")
                     if not nombre or precio_por_dia <= 0:
-                        log.error("Datos inválidos para agregar herramienta.")
+                        print("Datos inválidos para agregar herramienta.")
                         return
-                    cursor.execute(cls._INSERTAR_HERRAMIENTA, (nombre, descripcion, precio_por_dia, disponible))
+                    cursor.execute(
+                        cls._INSERTAR_HERRAMIENTA,
+                        (nombre, descripcion, precio_por_dia, disponible),
+                    )
                     return cursor.lastrowid
         except Exception as e:
-            log.error(f"Error al agregar herramienta: {e}")
-            
+            print(f"Error al agregar herramienta: {e}")

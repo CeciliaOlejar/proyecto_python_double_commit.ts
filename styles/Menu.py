@@ -81,3 +81,18 @@ class Menu:
         ╚══════════════════════════════════════════════════════╝
         {Style.RESET_ALL}"""
         Menu.maquina_de_escribir(text)
+
+    @staticmethod
+    def mostrar_herramientas(herramientas):
+        text = f"""
+        {Fore.MAGENTA}{Style.BRIGHT}
+        ╔════════════════════════════════════════════════════════════╗
+        ║               Herramientas Disponibles                    ║
+        ╠════════════════════════════════════════════════════════════╣
+        """
+        for idx, herramienta in enumerate(herramientas, 1):
+            text += f"{Fore.CYAN}║  {idx}. {herramienta:<55}{Fore.MAGENTA}║\n"
+        text += f"""╚════════════════════════════════════════════════════════════╝
+        {Fore.YELLOW}Selecciona una herramienta por número o presiona Enter para volver.{Style.RESET_ALL}
+        """
+        Menu.maquina_de_escribir(text)
