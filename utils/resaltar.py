@@ -2,7 +2,7 @@ from colorama import Style, Fore
 from utils.efecto import consola
 
 
-def codigo(bloques: list):
+def color_codigo(bloques: list):
     for bloque in bloques:
         if bloque.startswith("```") and bloque.endswith("```"):
             bloque.strip("```")

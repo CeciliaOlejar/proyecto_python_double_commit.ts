@@ -1,11 +1,13 @@
 import psycopg2 as bd
 import sys
+from dotenv import load_dotenv
 
-
+USERNAME_DB = load_dotenv("DB_USER")
+PASSWORD_DB = load_dotenv("DB_PASSWORD")
 class Conexion:
     _DATABASE = "contrurent"
-    _USERNAME = "postgres"
-    _PASSWORD = "32088028..mGc"
+    _USERNAME = USERNAME_DB
+    _PASSWORD = PASSWORD_DB
     _PORT = "5432"
     _HOST = "127.0.0.1"
     _conexion = None

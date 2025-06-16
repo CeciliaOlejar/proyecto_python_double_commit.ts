@@ -2,10 +2,13 @@ from colorama import init, Fore, Style
 import cohere
 from styles.Menu import Menu
 import re
-from utils.resaltar import codigo
+from utils.resaltar import color_codigo
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 init()
-API_KEY = "<<tu_api_key_perrito_rabioso>>"
+API_KEY = os.getenv("COHERE_API_KEY")
 
 class Chat:
     @staticmethod
@@ -48,12 +51,11 @@ class Chat:
 
                 # Dividir la respuesta en bloques de código y texto normal
                 bloques = re.split(r"(```[^`]+```)", full_response)
-                codigo(bloques)
+                color_codigo(bloques)
                 print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
 
                 print("\n")
 
-                # Guardamos la respuesta en historial para mantener el contexto
                 history.append({"role": "assistant", "content": full_response})
         except Exception as e:
             print(e)
@@ -93,7 +95,7 @@ class Chat:
             bloques = re.split(r"(```[^`]+```)", full_response)
 
             print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
-            codigo(bloques)
+            color_codigo(bloques)
             print("\n")
             history.append({"role": "assistant", "content": full_response})
         except Exception as e:
