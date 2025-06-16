@@ -1,18 +1,10 @@
 from colorama import init, Style, Fore
-import sys
-import time
+from utils.efecto import consola
 import getpass
 
 init()
 
 class Menu:
-    @staticmethod
-    def maquina_de_escribir(text, delay=0.003):
-        for char in text:
-            sys.stdout.write(char)
-            sys.stdout.flush()
-            time.sleep(delay)
-
     @staticmethod
     def principal():
         text = f"""
@@ -28,7 +20,7 @@ class Menu:
         ║  5. Salir                                                  ║
         ╚════════════════════════════════════════════════════════════╝
         """
-        Menu.maquina_de_escribir(text)
+        consola(text)
     
     @staticmethod
     def opcion() -> int:
@@ -43,7 +35,7 @@ class Menu:
         ║                    Registro de usuario                     ║
         ╠════════════════════════════════════════════════════════════╣
         {Style.RESET_ALL}"""
-        Menu.maquina_de_escribir(text)
+        consola(text)
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Usuario: {Style.RESET_ALL}""", end="")
         username = input()
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
@@ -68,7 +60,7 @@ class Menu:
         ╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """
-        Menu.maquina_de_escribir(text)
+        consola(text)
     
     def asistente(username):
         text = f"""{Fore.YELLOW}
@@ -86,7 +78,7 @@ class Menu:
         ║                                                      ║
         ╚══════════════════════════════════════════════════════╝
         {Style.RESET_ALL}"""
-        Menu.maquina_de_escribir(text)
+        consola(text)
 
     @staticmethod
     def mostrar_herramientas(herramientas):
@@ -101,4 +93,4 @@ class Menu:
         text += f"""╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Selecciona una herramienta por número o presiona Enter para volver.{Style.RESET_ALL}
         """
-        Menu.maquina_de_escribir(text)
+        consola(text)

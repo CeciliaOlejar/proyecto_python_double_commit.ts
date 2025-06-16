@@ -21,7 +21,7 @@ class Chat:
                     Hablas de forma clara y respetuosa. Tu objetivo es ayudar a los usuarios para la tienda de negocios ContruRent,
                     que es una aplicación de alquiler de herramientas. El nombre del usuario es {username}, dirígite a él por su nombre.
                     Puede que el usuario no te diga su nombre y te pregunte algo solamente. Responde cordialmente.
-                """,
+                    """,
                 }
             ]
 
