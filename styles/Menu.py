@@ -2,8 +2,8 @@ from colorama import init, Style, Fore
 from utils.efecto import consola
 import getpass
 
-init()
 
+init()
 class Menu:
     @staticmethod
     def principal():

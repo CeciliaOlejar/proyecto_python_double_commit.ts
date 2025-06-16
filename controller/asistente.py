@@ -2,6 +2,7 @@ from colorama import init, Fore, Style
 import cohere
 from styles.Menu import Menu
 import re
+from utils.resaltar import codigo
 
 init()
 API_KEY = "<<tu_api_key_perrito_rabioso>>"
@@ -46,21 +47,10 @@ class Chat:
                 )
 
                 # Dividir la respuesta en bloques de código y texto normal
-                blocks = re.split(r"(```[^`]+```)", full_response)
-
+                bloques = re.split(r"(```[^`]+```)", full_response)
+                codigo(bloques)
                 print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
-                for block in blocks:
-                    if block.startswith("```") and block.endswith("```"):
-                        # Bloque de código
-                        block.strip("```")
-                        for char in block:
-                            Menu.maquina_de_escribir(
-                                text=f"{Fore.GREEN}{char}{Style.RESET_ALL}", delay=0.002
-                            )
-                    else:
-                        # Texto normal
-                        for char in block:
-                            Menu.maquina_de_escribir(char)
+
                 print("\n")
 
                 # Guardamos la respuesta en historial para mantener el contexto
@@ -100,19 +90,10 @@ class Chat:
             full_response = "".join(
                 [chunk.text for chunk in response.message.content if chunk]
             )
-            blocks = re.split(r"(```[^`]+```)", full_response)
+            bloques = re.split(r"(```[^`]+```)", full_response)
 
             print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
-            for block in blocks:
-                if block.startswith("```") and block.endswith("```"):
-                    block.strip("```")
-                    for char in block:
-                        Menu.maquina_de_escribir(
-                            text=f"{Fore.GREEN}{char}{Style.RESET_ALL}", delay=0.002
-                        )
-                else:
-                    for char in block:
-                        Menu.maquina_de_escribir(char)
+            codigo(bloques)
             print("\n")
             history.append({"role": "assistant", "content": full_response})
         except Exception as e:
