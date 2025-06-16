@@ -26,13 +26,9 @@ class Herramienta:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
-                    # Seleccionamos las herramientas de la base de datos
                     cursor.execute(cls._SELECCIONAR_HERRAMIENTAS)
                     registros = cursor.fetchall()
-                    herramientas = []
-                    for registro in registros:
-                        herramientas.append(registro)
-                    return herramientas
+                    return registros
         except Exception as e:
             print(f"Error al listar herramientas: {e}")
             return []

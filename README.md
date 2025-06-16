@@ -10,6 +10,7 @@ Aplicación desarrollada en Python para gestionar un catálogo de herramientas d
 - Registro e inicio de sesión de usuarios
 - Catálogo de herramientas disponibles para alquilar
 - Alquiler de herramientas con control de tiempo
+- Asistente IA integrado al sistema
 - Devolución de herramientas
 - Historial de alquileres por usuario
 

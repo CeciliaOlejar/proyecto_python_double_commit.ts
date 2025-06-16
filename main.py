@@ -17,7 +17,8 @@ if __name__ == "__main__":
                     Usuario_DAO.eliminar_usuario(id)
                 elif opcion == 3:
                     print("Explorando herramientas disponibles...")
-                    Herramienta.listar_herramientas()
+                    herramientas = Herramienta.listar_herramientas()
+                    Menu.mostrar_herramientas(herramientas)
                 elif opcion == 4:
                     pregunta = input(
                         "Pregunta lo que quieras (escribe 'salir' para terminar): "

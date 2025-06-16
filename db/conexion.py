@@ -1,9 +1,10 @@
 import psycopg2 as bd
-import sys
+import sys, os
 from dotenv import load_dotenv
 
-USERNAME_DB = load_dotenv("DB_USER")
-PASSWORD_DB = load_dotenv("DB_PASSWORD")
+load_dotenv()
+USERNAME_DB = os.getenv("DB_USER")
+PASSWORD_DB = os.getenv("DB_PASSWORD")
 class Conexion:
     _DATABASE = "contrurent"
     _USERNAME = USERNAME_DB
