@@ -6,7 +6,7 @@ load_dotenv()
 USERNAME_DB = os.getenv("DB_USER")
 PASSWORD_DB = os.getenv("DB_PASSWORD")
 class Conexion:
-    _DATABASE = "contrurent"
+    _DATABASE = "construrent"
     _USERNAME = USERNAME_DB
     _PASSWORD = PASSWORD_DB
     _PORT = "5432"

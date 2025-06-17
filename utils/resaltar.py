@@ -13,3 +13,4 @@ def color_codigo(bloques: list):
         else:
             for char in bloque:
                 consola(char)
+    print()
