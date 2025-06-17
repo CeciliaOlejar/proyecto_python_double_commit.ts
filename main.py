@@ -2,6 +2,7 @@ from styles.Menu import Menu
 from controller.asistente import Chat
 from controller.usuario import Usuario_DAO
 from models.Herramienta import Herramienta
+from colorama import Fore, Style
 
 if __name__ == "__main__":
     try:
@@ -27,12 +28,12 @@ if __name__ == "__main__":
                         print("Saliendo del chat")
                     Chat.iniciar(pregunta)
                 elif opcion == 5:
-                    print("Saliendo de la aplicación...")
+                    print(f"{Fore.RED}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}")
                     break
                 else:
                     print(f"Opción: {opcion} no válida. Intenta de nuevo.")
             except Exception as e:
-                print(f"Error a ingresar la opción: {opcion}")
+                print(f"Error en el ingreso de opción.")
 
     except Exception as e:
         print(f"Ocurrió un error: {e}")

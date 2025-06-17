@@ -8,17 +8,27 @@ class Herramienta:
     _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s descripcion=%s precio_por_dia=%s disponible=%s"
     _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
-    def _init_(self, nombre, descripcion, precio_por_dia, disponible=True):
+    def _init_(self, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado=True):
         self._nombre = nombre
+        self._tipo = tipo
         self._descripcion = descripcion
+        self._marca = marca
+        self._modelo = modelo
+        self._fecha_adquisicion = fecha_adquisicion
+        self._ubicacion = ubicacion
         self._precio_por_dia = precio_por_dia
-        self._disponible = disponible
+        self._estado = estado
 
     def _str_(self):
         return f"""
         Herramienta: {self._nombre} - ${self._precio_por_dia}/día
+        Tipo: {self._tipo}
         Descripción: {self._descripcion}
-        Estado: {self._disponible}
+        Marca: {self._descripcion}
+        Modelo: {self._modelo}
+        Fecha Adquisición: {self._fecha_adquisicion}
+        Ubicación: {self._ubicacion}
+        Estado: {self._estado}
         """
 
     @classmethod

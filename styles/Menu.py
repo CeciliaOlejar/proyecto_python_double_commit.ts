@@ -1,7 +1,7 @@
 from colorama import init, Style, Fore
+from models.Herramienta import Herramienta
 from utils.efecto import consola
-import getpass
-
+import getpass, os
 
 init()
 class Menu:
@@ -63,7 +63,7 @@ class Menu:
         consola(text)
     
     def asistente(username):
-        text = f"""{Fore.YELLOW}
+        text = f"""{Fore.GREEN}
         ╔══════════════════════════════════════════════════════╗
         ║                                                      ║
         ║   🌟 ¡BIENVENIDO A TU ASISTENTE VIRTUAL! 🌟          ║
@@ -79,18 +79,32 @@ class Menu:
         ╚══════════════════════════════════════════════════════╝
         {Style.RESET_ALL}"""
         consola(text)
-
+    
     @staticmethod
-    def mostrar_herramientas(herramientas):
-        text = f"""
-        {Fore.MAGENTA}{Style.BRIGHT}
-        ╔════════════════════════════════════════════════════════════╗
-        ║               Herramientas Disponibles                    ║
-        ╠════════════════════════════════════════════════════════════╣
-        """
-        for idx, herramienta in enumerate(herramientas, 1):
-            text += f"{Fore.CYAN}║  {idx}. {herramienta:<55}{Fore.MAGENTA}║\n"
-        text += f"""╚════════════════════════════════════════════════════════════╝
-        {Fore.YELLOW}Selecciona una herramienta por número o presiona Enter para volver.{Style.RESET_ALL}
-        """
-        consola(text)
+    def mostrar_herramientas(herramientas: list):
+        try:
+            ancho_consola = os.get_terminal_size().columns
+            titulo = "Herramientas Disponibles"
+            separador = "═" * (ancho_consola - 2)
+            espacio_titulo = (ancho_consola - len(titulo) - 2) // 2
+
+            text = f"""
+    {Fore.GREEN}{Style.BRIGHT}╔{separador}╗
+    ║{' ' * espacio_titulo}{titulo}{' ' * (ancho_consola - len(titulo) - 2 - espacio_titulo)}║
+    ╠{separador}╣
+    """
+
+            for idx, herramienta in enumerate(herramientas, 1):
+                id_, nombre, tipo, descripcion, marca, modelo, *_ = herramienta
+                resumen = f"{idx}. {nombre} ({tipo}) - {marca}, Modelo {modelo}"
+                espacio = ancho_consola - len(resumen) - 4
+                espacio = max(0, espacio)
+                text += f"║ {Fore.CYAN}{resumen}{' ' * espacio}{Fore.GREEN}║\n"
+
+            text += f"""╚{separador}╝
+    {Fore.YELLOW}Selecciona una herramienta por número o presiona Enter para volver.{Style.RESET_ALL}
+    """
+            consola(text)
+        except Exception as e:
+            print(f"Ocurrió un error: {e}")
+

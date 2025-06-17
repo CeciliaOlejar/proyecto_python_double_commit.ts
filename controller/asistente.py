@@ -14,14 +14,13 @@ class Chat:
     @staticmethod
     def iniciar(username):
         try:
-            Menu.asistente(username)
             client = cohere.ClientV2(API_KEY)
 
             history = [
                 {
                     "role": "system",
                     "content": f"""
-                    Tu nombre es Kai. Eres un asistente amigable, confiable y profesional.
+                    Eres un asistente amigable, te llamas  confiable y profesional.
                     Hablas de forma clara y respetuosa. Tu objetivo es ayudar a los usuarios para la tienda de negocios ContruRent,
                     que es una aplicación de alquiler de herramientas. El nombre del usuario es {username}, dirígite a él por su nombre.
                     Puede que el usuario no te diga su nombre y te pregunte algo solamente. Responde cordialmente.
@@ -41,7 +40,7 @@ class Chat:
                     model="command-a-03-2025",
                     messages=history,
                     temperature=0.3,
-                    stop_sequences=["User:", "Kai"],
+                    stop_sequences=["User:", "RentaBot:"],
                     frequency_penalty=0.3,
                 )
 
@@ -52,7 +51,7 @@ class Chat:
                 # Dividir la respuesta en bloques de código y texto normal
                 bloques = re.split(r"(```[^`]+```)", full_response)
                 color_codigo(bloques)
-                print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
+                print(f"\n{Fore.BLUE}🤖 RentaBot: {Style.RESET_ALL}", end="")
 
                 print("\n")
 
