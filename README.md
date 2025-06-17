@@ -3,7 +3,7 @@
 
 # 🛠️ Catálogo de Herramientas para Alquiler
 
-Aplicación desarrollada en Python para gestionar un catálogo de herramientas disponibles para **alquiler**, con control de **usuarios**, **registro de herramientas**, y **seguimiento de tiempo de alquiler**.
+Aplicación desarrollada en Python para gestionar un catálogo de herramientas disponibles para **alquiler**, con control de **usuarios**, **registro de herramientas**, **asistente IA** y **seguimiento de tiempo de alquiler**.
 
 ## 🚀 Funcionalidades principales
 
