@@ -76,7 +76,6 @@ proyecto/
 ├── venv/*
 ├── .env
 ├── requirements.txt
-├── README.md
 └── README.md
 ```
 
