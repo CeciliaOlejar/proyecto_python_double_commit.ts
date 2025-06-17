@@ -93,7 +93,7 @@ class Chat:
             )
             bloques = re.split(r"(```[^`]+```)", full_response)
 
-            print(f"\n{Fore.BLUE}👩 Kai: {Style.RESET_ALL}", end="")
+            print(f"\n{Fore.BLUE}🤖 RentaBot: {Style.RESET_ALL}", end="")
             color_codigo(bloques)
             print("\n")
             history.append({"role": "assistant", "content": full_response})
