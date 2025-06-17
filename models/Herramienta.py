@@ -4,8 +4,8 @@ from db.conexion import Conexion
 class Herramienta:
 
     _SELECCIONAR_HERRAMIENTAS = "SELECT * FROM herramienta ORDER BY id_herramienta"
-    _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, descripcion, precio_por_dia, disponible) VALUES (%s,%s,%s,%s)"
-    _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s descripcion=%s precio_por_dia=%s disponible=%s"
+    _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado) VALUES (%s,%s,%s,%s)"
+    _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s tipo=%s descripcion=%s marca=%s modelo=%s fecha_adquisicion=%s ubicacion=%s precio_por_dia=%s estado=%s"
     _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
     def _init_(self, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado=True):
@@ -28,6 +28,7 @@ class Herramienta:
         Modelo: {self._modelo}
         Fecha Adquisición: {self._fecha_adquisicion}
         Ubicación: {self._ubicacion}
+        Precio/día: {self._precio_por_dia}
         Estado: {self._estado}
         """
 
@@ -45,32 +46,39 @@ class Herramienta:
 
     @classmethod
     def agregar_herramienta(
-        cls, nombre, descripcion, precio_por_dia, disponible=True
+        cls, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado="Disponible"
     ) -> int:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
-                    # Verificar si la herramienta ya existe
                     cursor.execute(
-                        "SELECT * FROM herramienta WHERE nombre=%s", (nombre,)
+                        "SELECT * FROM herramienta WHERE modelo=%s", (modelo,)
                     )
                     if cursor.fetchone() is not None:
-                        print(f"La herramienta '{nombre}' ya existe.")
+                        print(f"La herramienta con el siguiente '{modelo}' ya existe.")
                         return
-                    # Insertar nueva herramienta
-                    print(f"Agregando herramienta: {nombre}")
-                    if not nombre or precio_por_dia <= 0:
+                    print(f"Se ha agregado la siguiente herramienta: {nombre}")
+                    if not nombre or precio_por_dia <= 0 or not marca:
                         print("Datos inválidos para agregar herramienta.")
                         return
                     cursor.execute(
                         cls._INSERTAR_HERRAMIENTA,
-                        (nombre, descripcion, precio_por_dia, disponible),
+                        (nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado),
                     )
                     return cursor.lastrowid
         except Exception as e:
             print(f"Error al agregar herramienta: {e}")
             
     @classmethod
+    def actualizar_herrmaineta(cls, ):
+        try:
+            with Conexion.obtener_conexion():
+                with Conexion.obtener_cursor() as cursor:
+                    cursor.execute(cls._ACTUALIZAR_HERRAMIENTA, ())
+        except Exception as e:
+            print(f"Ocurrió un error {e}")
+    @classmethod
+    
     def eliminar(cls, id_herramienta):
         try:
             with Conexion.obtener_conexion():

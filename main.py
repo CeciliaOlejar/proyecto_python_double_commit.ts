@@ -14,12 +14,14 @@ if __name__ == "__main__":
                 if opcion == 1:
                     Menu.login()
                 elif opcion == 2:
-                    id = int(input("Ingrese el id del usuario para eliminar: "))
-                    Usuario_DAO.eliminar_usuario(id)
+                    usuario = Menu.registro()
+                    Usuario_DAO.crear_usuario(usuario)
                 elif opcion == 3:
-                    print("Explorando herramientas disponibles...")
+                    print(f"{Fore.WHITE}{Style.BRIGHT}Explorando herramientas disponibles...{Style.RESET_ALL}")
                     herramientas = Herramienta.listar_herramientas()
-                    for index, herramienta in herramientas:
+                    index = 0
+                    for herramienta in herramientas:
+                        index+=1
                         print(f"{Fore.LIGHTBLACK_EX}{index}. {herramienta}{Style.RESET_ALL}")
                 elif opcion == 4:
                     nombre = input(

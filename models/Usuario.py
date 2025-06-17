@@ -1,18 +1,9 @@
 class Usuario:
-    def __init__(self, id_usuario, nombre, apellido, email, contrasena):
-        self._id_usuario = id_usuario
+    def __init__(self, nombre, apellido, email, contrasena):
         self._nombre = nombre
         self._apellido = apellido
         self._email = email
         self._contrasena = contrasena
-
-    @property
-    def id_usuario(self):
-        return self._id_usuario
-
-    @id_usuario.setter
-    def id_usuario(self, id_usuario):
-        self._id_usuario = id_usuario
 
     @property
     def nombre(self):

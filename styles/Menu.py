@@ -1,13 +1,13 @@
 from colorama import init, Style, Fore
-from models.Herramienta import Herramienta
+from models.Usuario import Usuario
 from utils.efecto import consola
-import getpass, os
+import getpass, textwrap
 
 init()
 class Menu:
     @staticmethod
     def principal():
-        text = f"""
+        text = textwrap.dedent(f"""
         {Fore.GREEN}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
         ║                   Bienvenido a Construrent                 ║
@@ -19,7 +19,7 @@ class Menu:
         ║  4. Preguntar a RentaBot (asistente IA)                    ║
         ║  5. Salir                                                  ║
         ╚════════════════════════════════════════════════════════════╝
-        """
+        """)
         consola(text)
     
     @staticmethod
@@ -29,28 +29,30 @@ class Menu:
     
     @staticmethod
     def registro():
-        text = f"""
+        text = textwrap.dedent(f"""
         {Fore.BLUE}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
         ║                    Registro de usuario                     ║
         ╠════════════════════════════════════════════════════════════╣
-        {Style.RESET_ALL}"""
+        {Style.RESET_ALL}""")
         consola(text)
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Usuario: {Style.RESET_ALL}""", end="")
-        username = input()
+        nombre = input()
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Apellido: {Style.RESET_ALL}""", end="")
+        apellido = input()
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
         email = input()
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
-        password = getpass.getpass("")
-        print(f"""{Fore.BLUE}        ╚════════════════════════════════════════════════════════════╝
+        contrasena = getpass.getpass("")
+        print(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """)
-        registro = { username, password, email, password }
+        registro = Usuario(nombre, apellido, email, contrasena)
         return registro
 
     @staticmethod
     def login():
-        text = f"""
+        text = textwrap.dedent(f"""
         {Fore.BLUE}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
         ║                    Ingreso a la cuenta                     ║
@@ -59,11 +61,11 @@ class Menu:
         ║ {Fore.CYAN}Contraseña:                                                ║
         ╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
-        """
+        """)
         consola(text)
     
     def asistente(username):
-        text = f"""{Fore.GREEN}
+        text = textwrap.dedent(f"""{Fore.GREEN}
         ╔══════════════════════════════════════════════════════╗
         ║                                                      ║
         ║   👋 ¡Hola, {username}!                                   ║
@@ -73,6 +75,6 @@ class Menu:
         ║   🚪 Escribe 'salir' para terminar                   ║
         ║                                                      ║
         ╚══════════════════════════════════════════════════════╝
-        {Style.RESET_ALL}"""
+        {Style.RESET_ALL}""")
         consola(text)
 
