@@ -21,12 +21,10 @@ if __name__ == "__main__":
                     herramientas = Herramienta.listar_herramientas()
                     Menu.mostrar_herramientas(herramientas)
                 elif opcion == 4:
-                    pregunta = input(
-                        "Pregunta lo que quieras (escribe 'salir' para terminar): "
+                    nombre = input(
+                        "A continucación escribe tu nombre, luego si deseas terminar el chat escibe <salir>: "
                     )
-                    if pregunta.lower() == "salir":
-                        print("Saliendo del chat")
-                    Chat.iniciar(pregunta)
+                    Chat.iniciar(nombre)
                 elif opcion == 5:
                     print(f"{Fore.RED}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}")
                     break
