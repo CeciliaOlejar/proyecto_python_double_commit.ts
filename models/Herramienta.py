@@ -1,14 +1,9 @@
-from db.conexion import Conexion
+import textwrap
 from colorama import Fore, Style
 
 class Herramienta:
-
-    _SELECCIONAR_HERRAMIENTAS = "SELECT * FROM herramienta ORDER BY id_herramienta"
-    _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado) VALUES (%s,%s,%s,%s)"
-    _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s tipo=%s descripcion=%s marca=%s modelo=%s fecha_adquisicion=%s ubicacion=%s precio_por_dia=%s estado=%s"
-    _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
-
-    def _init_(self, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado=True):
+    def __init__(self, id_herramienta, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado=True):
+        self._id_herramienta = id_herramienta
         self._nombre = nombre
         self._tipo = tipo
         self._descripcion = descripcion
@@ -18,78 +13,95 @@ class Herramienta:
         self._ubicacion = ubicacion
         self._precio_por_dia = precio_por_dia
         self._estado = estado
+        
+    @property
+    def id_herramienta(self):
+        return self._id_herramienta
+    
+    @id_herramienta.setter
+    def id_herramienta(self, id_herramienta):
+        self._id_herramienta = id_herramienta
+    
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nombre):
+        self._nombre = nombre
+
+    @property
+    def tipo(self):
+        return self._tipo
+
+    @tipo.setter
+    def tipo(self, tipo):
+        self._tipo = tipo
+
+    @property
+    def descripcion(self):
+        return self._descripcion
+
+    @descripcion.setter
+    def descripcion(self, descripcion):
+        self._descripcion = descripcion
+
+    @property
+    def marca(self):
+        return self._marca
+
+    @marca.setter
+    def marca(self, marca):
+        self._marca = marca
+
+    @property
+    def modelo(self):
+        return self._modelo
+
+    @modelo.setter
+    def modelo(self, modelo):
+        self._modelo = modelo
+
+    @property
+    def fecha_adquisicion(self):
+        return self._fecha_adquisicion
+
+    @fecha_adquisicion.setter
+    def fecha_adquisicion(self, fecha_adquisicion):
+        self._fecha_adquisicion = fecha_adquisicion
+
+    @property
+    def ubicacion(self):
+        return self._ubicacion
+
+    @ubicacion.setter
+    def ubicacion(self, ubicacion):
+        self._ubicacion = ubicacion
+
+    @property
+    def precio_por_dia(self):
+        return self._precio_por_dia
+
+    @precio_por_dia.setter
+    def precio_por_dia(self, precio_por_dia):
+        self._precio_por_dia = precio_por_dia
+
+    @property
+    def estado(self):
+        return self._estado
+
+    @estado.setter
+    def estado(self, estado):
+        self._estado = estado
 
     def __str__(self):
-        return f"""
-        Herramienta: {self._nombre} - ${self._precio_por_dia}/día
-        Tipo: {self._tipo}
+        return textwrap.dedent(f"""{Fore.BLUE}{Style.BRIGHT}
+        ID herramienta: {self._id_herramienta}
+        Herramienta: {self._nombre} {self._tipo} - ${self._precio_por_dia}/día
         Descripción: {self._descripcion}
-        Marca: {self._descripcion}
+        Marca: {self._marca}
         Modelo: {self._modelo}
         Fecha Adquisición: {self._fecha_adquisicion}
         Ubicación: {self._ubicacion}
-        Precio/día: {self._precio_por_dia}
         Estado: {self._estado}
-        """
-
-    @classmethod
-    def listar_herramientas(cls) -> list:
-        try:
-            with Conexion.obtener_conexion():
-                with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(cls._SELECCIONAR_HERRAMIENTAS)
-                    registros = cursor.fetchall()
-                    return registros
-        except Exception as e:
-            print(f"Error al listar herramientas: {e}")
-            return []
-
-    @classmethod
-    def agregar_herramienta(
-        cls, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado="Disponible"
-    ) -> int:
-        try:
-            with Conexion.obtener_conexion():
-                with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(
-                        "SELECT * FROM herramienta WHERE modelo=%s", (modelo,)
-                    )
-                    if cursor.fetchone() is not None:
-                        print(f"La herramienta con el siguiente '{modelo}' ya existe.")
-                        return
-                    if not nombre or precio_por_dia <= 0 or not marca:
-                        print("Datos inválidos para agregar herramienta.")
-                        return
-                    cursor.execute(
-                        cls._INSERTAR_HERRAMIENTA,
-                        (nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado),
-                    )
-                    print(f"{Fore.GREEN}{Style.BRIGHT}Se ha agregado la siguiente herramienta:{Style.RESET_ALL}")
-                    print(f"{Fore.WHITE}{Style.BRIGHT}{Herramienta.__str__()}{Style.RESET_ALL}")
-                    return cursor.lastrowid
-        except Exception as e:
-            print(f"Error al agregar herramienta: {e}")
-            
-    @classmethod
-    def actualizar_herrmaineta(cls, ):
-        try:
-            with Conexion.obtener_conexion():
-                with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(cls._ACTUALIZAR_HERRAMIENTA, ())
-        except Exception as e:
-            print(f"Ocurrió un error {e}")
-    @classmethod
-    
-    def eliminar(cls, id_herramienta):
-        try:
-            with Conexion.obtener_conexion():
-                with Conexion.obtener_cursor() as cursor:
-                    cursor.execute("SELECT nombre FROM herramienta WHERE id_herramienta=%s", (id_herramienta,))
-                    id, nombre = cursor.fetchone()
-                    if not id:
-                        print(f"ID de herramienta inexistente {id_herramienta}")
-                        return
-                    cursor.execute(cls._ELIMINAR_HERRAMIENTA, (id_herramienta,))
-                    return cursor.rowcount, nombre
-        except Exception as e:
-            print(f"Ocurrió un error {e}")
+        {Style.RESET_ALL}""")
