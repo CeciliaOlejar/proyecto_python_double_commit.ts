@@ -1,5 +1,5 @@
 from db.conexion import Conexion
-
+from colorama import Fore, Style
 
 class Herramienta:
 
@@ -19,7 +19,7 @@ class Herramienta:
         self._precio_por_dia = precio_por_dia
         self._estado = estado
 
-    def _str_(self):
+    def __str__(self):
         return f"""
         Herramienta: {self._nombre} - ${self._precio_por_dia}/día
         Tipo: {self._tipo}
@@ -57,7 +57,6 @@ class Herramienta:
                     if cursor.fetchone() is not None:
                         print(f"La herramienta con el siguiente '{modelo}' ya existe.")
                         return
-                    print(f"Se ha agregado la siguiente herramienta: {nombre}")
                     if not nombre or precio_por_dia <= 0 or not marca:
                         print("Datos inválidos para agregar herramienta.")
                         return
@@ -65,6 +64,8 @@ class Herramienta:
                         cls._INSERTAR_HERRAMIENTA,
                         (nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado),
                     )
+                    print(f"{Fore.GREEN}{Style.BRIGHT}Se ha agregado la siguiente herramienta:{Style.RESET_ALL}")
+                    print(f"{Fore.WHITE}{Style.BRIGHT}{Herramienta.__str__()}{Style.RESET_ALL}")
                     return cursor.lastrowid
         except Exception as e:
             print(f"Error al agregar herramienta: {e}")

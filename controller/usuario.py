@@ -1,5 +1,6 @@
 from db.conexion import Conexion
 from models.Usuario import Usuario
+from colorama import Fore, Style
 
 class Usuario_DAO:
     _SELECCIONAR_USUARIO = "SELECT * FROM usuario ORDER BY id_usuario"
@@ -21,7 +22,7 @@ class Usuario_DAO:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
                     cursor.execute(cls._INSERTAR_USUARIO, (usuario.nombre, usuario.apellido, usuario.email, usuario.contrasena))
-                    print("Usuario creado exitosamente.")
+                    print(f"{Fore.GREEN}{Style.BRIGHT}Usuario creado exitosamente.{Style.RESET_ALL}")
         except Exception as e:
             print(f"Error al crear usuario: {e}")
 
