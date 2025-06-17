@@ -1,5 +1,5 @@
-|  ContruRent |
-| ----------- |
+|  ConstruRent |
+| ------------ |
 
 # 🛠️ Catálogo de Herramientas para Alquiler
 
@@ -55,8 +55,12 @@ pip install -r requirements.txt
 
 ```bash
 proyecto/
-├── venv/
+├── alquiler/
+│   └── gestion_alquiler.py
 ├── main.py
+├── controller/
+│   ├── asistente.py
+│   └── usuario.py
 ├── db/
 │   └── conexion.py
 ├── models/
@@ -66,12 +70,18 @@ proyecto/
 │   └── gestion_alquiler.py
 ├── styles/
 │   └── Menu.py
+├── utils/
+│   ├── efecto.py
+│   └── resaltar.py
+├── venv/*
+├── .env
 ├── requirements.txt
+├── README.md
 └── README.md
 ```
 
 ---
 
 <div align="center">
-   ContruRent • doubleCommit.ts 2025
+   ConstruRent • doubleCommit.ts 2025
 </div>

@@ -84,7 +84,7 @@ class Chat:
                 model="command-a-03-2025",
                 messages=history,
                 temperature=0.3,
-                stop_sequences=["User:", "Kai"],
+                stop_sequences=["User:", "RentaBot"],
                 frequency_penalty=0.3,
             )
 
