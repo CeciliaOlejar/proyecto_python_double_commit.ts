@@ -67,7 +67,7 @@ class Ticket(Herramienta):
 
     def __str__(self):
         total = self.calcular_total()
-        return textwrap.dedent(f"""\{Fore.BLUE}
+        return textwrap.dedent(f"""\{Fore.BLUE}{Style.BRIGHT}
         ───── TICKET N° {self._id_ticket} ─────
         Cliente: {self._cliente if self._cliente else 'No especificado'}
         Estado del ticket: {self._estado_ticket}
