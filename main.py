@@ -35,8 +35,8 @@ if __name__ == "__main__":
                     break
                 elif opcion == 6:
                     # Esto es una Prueba de clase Ticket (No va esta opción...)
-                    usuario = Usuario("Juan", "Pérez", "juan@example.com", "secreta123")
-    
+                    usuario = Usuario("Juan", "Pérez", "juan_perez@yahoo.com", "secreta123")
+                    usuario1 = Usuario("Manuel", "Calavera", "manny_calevara@gamilcom", "admin1234")
                     ticket = Ticket(
                         id_herramienta=1,
                         nombre="Taladro",
@@ -54,6 +54,23 @@ if __name__ == "__main__":
                     )
 
                     print(ticket)
+                    ticket1 = Ticket(
+                        id_herramienta=2,
+                        nombre="Amoladora",
+                        tipo="Eléctrica",
+                        descripcion="Amoladora eléctrica",
+                        marca="DeWalt",
+                        modelo="DCD89CG2",
+                        fecha_adquisicion=date(2024, 2, 16),
+                        ubicacion="Almacén 3",
+                        precio_por_dia=1500,
+                        estado="Disponible",
+                        cliente=usuario1,
+                        fecha_inicio=date(2025, 6, 10),
+                        fecha_fin=date(2025, 6, 12),
+                    )
+
+                    print(ticket1)
                 else:
                     print(f"{Fore.YELLOW}Opción: {opcion} no válida. Intenta de nuevo.{Style.RESET_ALL}")
             except Exception as e:

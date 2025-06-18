@@ -96,12 +96,13 @@ class Herramienta:
 
     def __str__(self):
         return textwrap.dedent(f"""{Fore.BLUE}{Style.BRIGHT}
-        ID herramienta: {self._id_herramienta}
-        Herramienta: {self._nombre} {self._tipo} - ${self._precio_por_dia}/día
+        ID: {self._id_herramienta}
+        Nombre: {self._nombre} {self._tipo}
         Descripción: {self._descripcion}
         Marca: {self._marca}
         Modelo: {self._modelo}
         Fecha Adquisición: {self._fecha_adquisicion}
         Ubicación: {self._ubicacion}
+        Precio: ${self._precio_por_dia}/día
         Estado: {self._estado}
         {Style.RESET_ALL}""")

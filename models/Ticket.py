@@ -33,13 +33,9 @@ class Ticket(Herramienta):
             precio_por_dia,
             estado,
         )
-
         self._id_ticket = Ticket.contador_ticket
         Ticket.contador_ticket += 1
-
-        self._cliente = (
-            cliente  # A este cliente le vamos a instanciar la clase Usuario para su uso
-        )
+        self._cliente = (cliente) # Le pasamos una instancia de Usuario
         self._fecha_inicio = fecha_inicio
         self._fecha_fin = fecha_fin
         self._estado_ticket = "Activo"  # Puede ser: 'Activo', 'Finalizado', 'Cancelado'
@@ -67,13 +63,14 @@ class Ticket(Herramienta):
 
     def __str__(self):
         total = self.calcular_total()
-        return textwrap.dedent(f"""\{Fore.BLUE}{Style.BRIGHT}
+        return textwrap.dedent(f"""{Fore.BLUE}{Style.BRIGHT}
         ───── TICKET N° {self._id_ticket} ─────
-        Cliente: {self._cliente if self._cliente else 'No especificado'}
+        {self._cliente if self._cliente else 'No especificado'} 
         Estado del ticket: {self._estado_ticket}
         Fecha de inicio: {self._fecha_inicio or 'No definida'}
         Fecha de fin: {self._fecha_fin or 'No definida'}
         Costo total estimado: ${total}
-        Herramienta asociada:
+        
+        ───── HERRAMIENTA ─────
         {super().__str__()}{Style.RESET_ALL}
         """)
