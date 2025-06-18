@@ -3,6 +3,9 @@ from controller.asistente import Chat
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
 from colorama import Fore, Style
+from models.Ticket import Ticket
+from models.Usuario import Usuario
+from datetime import date
 
 if __name__ == "__main__":
     try:
@@ -28,8 +31,29 @@ if __name__ == "__main__":
                     catalogo = Herramienta_DAO.listar_herramientas()
                     Chat.iniciar(nombre, catalogo)
                 elif opcion == 5:
-                    print(f"{Fore.CYAN}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}")
                     break
+                elif opcion == 6:
+                    # Esto es una Prueba de clase Ticket (No va esta opción...)
+                    usuario = Usuario("Juan", "Pérez", "juan@example.com", "secreta123")
+    
+                    ticket = Ticket(
+                        id_herramienta=1,
+                        nombre="Taladro",
+                        tipo="Eléctrica",
+                        descripcion="Taladro inalámbrico de 18V",
+                        marca="DeWalt",
+                        modelo="DCD791D2",
+                        fecha_adquisicion=date(2023, 1, 15),
+                        ubicacion="Almacén 1",
+                        precio_por_dia=1000,
+                        estado="Disponible",
+                        cliente=usuario,
+                        fecha_inicio=date(2025, 6, 10),
+                        fecha_fin=date(2025, 6, 12),
+                    )
+
+                    print(ticket)
                 else:
                     print(f"{Fore.YELLOW}Opción: {opcion} no válida. Intenta de nuevo.{Style.RESET_ALL}")
             except Exception as e:

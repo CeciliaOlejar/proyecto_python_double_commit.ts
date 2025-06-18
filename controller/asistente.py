@@ -1,5 +1,5 @@
 from colorama import init, Fore, Style
-from utils.config import response_config
+from utils.cohere_config import response_config
 from utils.resaltar import color_codigo
 import re
 

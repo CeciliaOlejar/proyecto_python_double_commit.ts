@@ -6,6 +6,7 @@ from colorama import Fore, Style
 load_dotenv()
 USERNAME_DB = os.getenv("DB_USER")
 PASSWORD_DB = os.getenv("DB_PASSWORD")
+
 class Conexion:
     _DATABASE = "construrent"
     _USERNAME = USERNAME_DB
