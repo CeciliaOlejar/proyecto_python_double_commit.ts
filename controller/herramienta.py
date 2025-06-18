@@ -116,7 +116,7 @@ class Herramienta_DAO:
                     )
                     id, nombre = cursor.fetchone()
                     if not id:
-                        print(f"ID de herramienta inexistente {id_herramienta}")
+                        print(f"{Fore.YELLOW}{Style.BRIGHT}ID de herramienta inexistente {id_herramienta}{Style.RESET_ALL}")
                         return
                     cursor.execute(cls._ELIMINAR_HERRAMIENTA, (id_herramienta,))
                     return cursor.rowcount, nombre

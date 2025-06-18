@@ -1,6 +1,7 @@
 import psycopg2 as bd
 import sys, os
 from dotenv import load_dotenv
+from colorama import Fore, Style
 
 load_dotenv()
 USERNAME_DB = os.getenv("DB_USER")
@@ -27,7 +28,7 @@ class Conexion:
                 )
                 return cls._conexion
             except Exception as e:
-                print(f"Ocurrió un error: {e}")
+                print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error: {e}{Style.RESET_ALL}")
                 sys.exit()
         else:
             return cls._conexion
