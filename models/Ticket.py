@@ -55,7 +55,7 @@ class Ticket(Herramienta):
         return 0
 
     def validar_fechas(self):
-        if self.fecha_inicio and self.fecha_fin:
+        if self._fecha_inicio and self._fecha_fin:
             return self._fecha_inicio <= self._fecha_fin
         return True  # Si falta alguna fecha, no validamos
 
