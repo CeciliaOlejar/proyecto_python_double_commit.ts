@@ -166,19 +166,19 @@ class Chat:
                     if opcion_numero == "1":
                         print("Ejecutando: Iniciar Sesión")
                         Menu.login()
-                        break
+                        continue
                     elif opcion_numero == "2":
                         print("Ejecutando: Crear nueva cuenta")
                         usuario = Menu.registro()
                         Usuario_DAO.crear_usuario(usuario)
-                        break
+                        continue
                     elif opcion_numero == "3":
                         print("Ejecutando: Explorar herramientas")
                         print(f"{Fore.WHITE}{Style.BRIGHT}Explorando herramientas disponibles...{Style.RESET_ALL}")
                         herramientas = Herramienta_DAO.listar_herramientas()
                         for herramienta in herramientas:
                             print(herramienta)
-                            break
+                        continue
                     elif opcion_numero == "4":
                         print("Continuando conversación con RentaBot, puedes hacer que busque información actual en la web...")
                         nombre = input(
