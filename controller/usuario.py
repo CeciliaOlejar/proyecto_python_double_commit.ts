@@ -5,12 +5,12 @@ from colorama import Fore, Style
 class Usuario_DAO:
     _SELECCIONAR_USUARIO = "SELECT * FROM usuario ORDER BY id_usuario"
     _INSERTAR_USUARIO = """
-    INSERT INTO usuario(nombre, apellido, email, contrasena)
+    INSERT INTO usuario(nombre, apellido, email, contrasenia)
     VALUES (%s, %s, %s, %s)
     """
     _ACTUALIZAR_USUARIO = """
     UPDATE usuario
-    SET nombre=%s, apellido=%s, email=%s, contrasena=%s
+    SET nombre=%s, apellido=%s, email=%s, contrasenia=%s
     WHERE id_usuario=%s
     """
     _ELIMINAR_USUARIO = "DELETE FROM usuario WHERE id_usuario=%s"
@@ -21,7 +21,7 @@ class Usuario_DAO:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(cls._INSERTAR_USUARIO, (usuario.nombre, usuario.apellido, usuario.email, usuario.contrasena))
+                    cursor.execute(cls._INSERTAR_USUARIO, (usuario.nombre, usuario.apellido, usuario.email, usuario.contrasenia))
                     print(f"{Fore.GREEN}{Style.BRIGHT}Usuario creado exitosamente.{Style.RESET_ALL}")
         except Exception as e:
             print(f"Error al crear usuario: {e}")
@@ -45,7 +45,7 @@ class Usuario_DAO:
         try:
             with Conexion.obtener_conexion():
                 with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(cls._ACTUALIZAR_USUARIO, (usuario.nombre, usuario.apellido, usuario.email, usuario.contrasena, usuario.id_usuario))
+                    cursor.execute(cls._ACTUALIZAR_USUARIO, (usuario.nombre, usuario.apellido, usuario.email, usuario.contrasenia, usuario.id_usuario))
                     print("Usuario actualizado exitosamente.")
         except Exception as e:
             print(f"Error al actualizar usuario: {e}")

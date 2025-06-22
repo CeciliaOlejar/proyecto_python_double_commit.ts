@@ -1,9 +1,9 @@
 class Usuario:
-    def __init__(self, nombre, apellido, email, contrasena):
+    def __init__(self, nombre, apellido, email, contrasenia):
         self._nombre = nombre
         self._apellido = apellido
         self._email = email
-        self._contrasena = contrasena
+        self._contrasenia = contrasenia
 
     @property
     def nombre(self):
@@ -30,12 +30,12 @@ class Usuario:
         self._email = email
 
     @property
-    def contrasena(self):
-        return self._contrasena
+    def contrasenia(self):
+        return self._contrasenia
 
-    @contrasena.setter
-    def contrasena(self, contrasena):
-        self._contrasena = contrasena
+    @contrasenia.setter
+    def contrasenia(self, contrasenia):
+        self._contrasenia = contrasenia
 
     def __str__(self):
         return f"""

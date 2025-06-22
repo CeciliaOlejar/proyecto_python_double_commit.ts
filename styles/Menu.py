@@ -43,11 +43,11 @@ class Menu:
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
         email = input()
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
-        contrasena = getpass.getpass("")
+        contrasenia = getpass.getpass("")
         print(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """)
-        registro = Usuario(nombre, apellido, email, contrasena)
+        registro = Usuario(nombre, apellido, email, contrasenia)
         return registro
 
     @staticmethod
