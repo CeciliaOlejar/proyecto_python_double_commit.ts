@@ -11,4 +11,4 @@ venv/
 
 # Archivos de configuración
 .env
-.env.*
+.env.local
