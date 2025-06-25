@@ -57,15 +57,15 @@ proyecto/
 ├── alquiler/
 │   └── gestion_alquiler.py
 ├── controller/
-│   ├── asistente.py
+│   ├── asistente.py  
+│   ├── herramienta.py
 │   └── usuario.py
 ├── db/
 │   └── conexion.py
 ├── models/
-│   ├── usuario.py
-│   └── herramienta.py
-├── alquiler/
-│   └── gestion_alquiler.py
+│   ├── Herramienta.py
+│   ├── Ticket-py 
+│   └── Usuario.py
 ├── styles/
 │   └── Menu.py
 ├── utils/
