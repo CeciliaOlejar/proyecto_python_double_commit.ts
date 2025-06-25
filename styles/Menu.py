@@ -43,10 +43,10 @@ class Menu:
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
         email = input()
         print(f"""{Fore.BLUE}║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
-        contrasenia = getpass.getpass("")
-        print(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
+        contrasenia = getpass.getpass("") # Esta función es para ocultar la contraseña
+        print(textwrap.dedent(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
-        """)
+        """))
         registro = Usuario(nombre, apellido, email, contrasenia)
         return registro
 
@@ -55,26 +55,21 @@ class Menu:
         text = textwrap.dedent(f"""
         {Fore.BLUE}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
-        ║                    Ingreso a la cuenta                     ║
+        ║                     Ingreso de usuario                     ║
         ╠════════════════════════════════════════════════════════════╣
-        ║ {Fore.CYAN}Usuario:                                                 ║
-        ║ {Fore.CYAN}Contraseña:                                                ║
-        ╚════════════════════════════════════════════════════════════╝
-        {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
-        """)
-        consola(text)
-    
-    def asistente(username):
-        text = textwrap.dedent(f"""{Fore.GREEN}
-        ╔══════════════════════════════════════════════════════╗
-        ║                                                      ║
-        ║   👋 ¡Hola, {username}!                                   ║
-        ║                                                      ║
-        ║   💬 Puedes preguntarme lo que quieras               ║
-        ║   💡 Estoy aquí para ayudarte                        ║
-        ║   🚪 Escribe 'salir' para terminar                   ║
-        ║                                                      ║
-        ╚══════════════════════════════════════════════════════╝
         {Style.RESET_ALL}""")
         consola(text)
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Usuario: {Style.RESET_ALL}""", end="")
+        nombre = input()
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Apellido: {Style.RESET_ALL}""", end="")
+        apellido = input()
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Email: {Style.RESET_ALL}""", end="")
+        email = input()
+        print(f"""{Fore.BLUE}║ {Fore.CYAN}Contraseña: {Style.RESET_ALL}""", end="")
+        contrasenia = getpass.getpass("") # Esta función es para ocultar la contraseña
+        print(textwrap.dedent(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
+        {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
+        """))
+        ingreso_usuario = Usuario(nombre, apellido, email, contrasenia)
+        return ingreso_usuario
 

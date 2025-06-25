@@ -33,9 +33,9 @@ cd proyecto_python_double_commit
 
 2. Crear el entorno virtual
 ```bash
-python -m venv .venv # Windows
+python -m venv venv # Windows
 
-python3 -m venv .venv # Linux / MacOs
+python3 -m venv venv # Linux / MacOs
 ```
 - Activar el entorno virtual
 ```bash
