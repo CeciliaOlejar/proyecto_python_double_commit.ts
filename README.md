@@ -11,7 +11,6 @@ Aplicación desarrollada en Python para gestionar un catálogo de herramientas d
 - Catálogo de herramientas disponibles para alquilar
 - Alquiler de herramientas con control de tiempo
 - Asistente IA integrado al sistema
-- Devolución de herramientas
 - Historial de alquileres por usuario
 
 ## 🧰 Tecnologías utilizadas
@@ -57,7 +56,6 @@ pip install -r requirements.txt
 proyecto/
 ├── alquiler/
 │   └── gestion_alquiler.py
-├── main.py
 ├── controller/
 │   ├── asistente.py
 │   └── usuario.py
@@ -71,10 +69,13 @@ proyecto/
 ├── styles/
 │   └── Menu.py
 ├── utils/
+│   ├── cohere_config.py
 │   ├── efecto.py
-│   └── resaltar.py
+│   ├── resaltar.py
+│   └── ubicacion.py
 ├── venv/*
 ├── .env
+├── main.py
 ├── requirements.txt
 └── README.md
 ```
