@@ -1,5 +1,5 @@
 class Usuario:
-    def __init__(self, nombre, apellido, email, contrasenia):
+    def __init__(self, nombre, apellido, email, contrasenia=None):
         self._nombre = nombre
         self._apellido = apellido
         self._email = email
