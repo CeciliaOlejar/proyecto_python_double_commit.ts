@@ -254,8 +254,9 @@ class Chat:
     @staticmethod
     def asistente_bienvenida() -> None:
         """Inicia el asistente de bienvenida"""
+        ciudad, pais = obtener_ubicacion()
         config = ConfiguracionChat(
-            mensaje_sistema=Chat._crear_mensaje_sistema("bienvenida"),
+            mensaje_sistema=Chat._crear_mensaje_sistema("bienvenida", ciudad=ciudad, pais=pais),
             mostrar_saludo=True,
             habilitar_detec_opciones=True
         )
