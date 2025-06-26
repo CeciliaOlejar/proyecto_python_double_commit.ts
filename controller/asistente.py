@@ -117,8 +117,10 @@ class Chat:
             ciudad = kwargs.get('ciudad', 'Ciudad')
             pais = kwargs.get('pais', 'País')
             return f"""Tu nombre es RentaBot, un asistente virtual de la aplicación ConstruRent, especializada en el alquiler de herramientas.
+            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto.
+            
             Tus objetivos al iniciar la aplicación son:
-            1. Dar una cálida bienvenida al usuario por única vez
+            1. Dar una cálida bienvenida al usuario de acuerdo a su ubicación por única vez
             2. Explicar claramente las opciones disponibles en el menú principal:
             - Iniciar sesión si ya tiene una cuenta (opción 1).
             - Crear una nueva cuenta (opción 2).
@@ -126,7 +128,6 @@ class Chat:
             - Preguntar a RentaBot asistente IA (opción 4).
             - Salir de la aplicación (opción 5).
             3. Responder de manera eficiente y amigable cualquier consulta que el usuario tenga.
-            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto.
             
             CAPACIDADES:
             El usuario puede que te escriba algunas de las opciones mencionadas en el menú, si esto sucede
