@@ -11,13 +11,24 @@ class Ticket_DAO:
                 cursor = conexion.cursor()
                 consulta = """
                     INSERT INTO ticket (
-                        id_herramienta, id_usuario, fecha_inicio, fecha_fin, estado_ticket
-                    ) VALUES (%s, %s, %s, %s, %s)
+                        id_herramienta, nombre, tipo, descripcion, marca, modelo,
+                        fecha_adquisicion, ubicacion, precio_por_dia, estado,
+                        id_usuario, fecha_inicio, fecha_fin, estado_ticket
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 cursor.execute(
                     consulta,
                     (
                         ticket.id_herramienta,
+                        ticket.nombre,
+                        ticket.tipo,
+                        ticket.descripcion,
+                        ticket.marca,
+                        ticket.modelo,
+                        ticket.fecha_adquisicion,
+                        ticket.ubicacion,
+                        ticket.precio_por_dia,
+                        ticket.estado,
                         ticket._cliente.id_usuario,
                         ticket._fecha_inicio,
                         ticket._fecha_fin,
