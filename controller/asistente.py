@@ -61,14 +61,14 @@ class ProcesadorMensajes:
     @staticmethod
     def extraer_busqueda_web(message: str) -> Optional[str]:
         """Extrae consulta de búsqueda web del mensaje"""
-        match = re.search(r"<<websearch:(.+?)>>", message)
-        return match.group(1).strip() if match else None
+        emparejar = re.search(r"<<websearch:(.+?)>>", message)
+        return emparejar.group(1).strip() if emparejar else None
     
     @staticmethod
     def extraer_opcion(message: str) -> Optional[str]:
         """Extrae número de opción del mensaje"""
-        match = re.search(r"<<opción:\s*(\d+)\s*>>", message)
-        return match.group(1).strip() if match else None
+        emparejar = re.search(r"<<opción:\s*(\d+)\s*>>", message)
+        return emparejar.group(1).strip() if emparejar else None
 
 class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
@@ -114,9 +114,11 @@ class Chat:
     def _crear_mensaje_sistema(tipo: str, **kwargs) -> str:
         """Crea mensajes del sistema según el tipo de chat"""
         if tipo == "bienvenida":
-            return """Tu nombre es RentaBot, un asistente virtual de la aplicación ConstruRent, especializada en el alquiler de herramientas.
+            ciudad = kwargs.get('ciudad', 'Ciudad')
+            pais = kwargs.get('pais', 'País')
+            return f"""Tu nombre es RentaBot, un asistente virtual de la aplicación ConstruRent, especializada en el alquiler de herramientas.
             Tus objetivos al iniciar la aplicación son:
-            1. Dar una cálida bienvenida al usuario por única vez.
+            1. Dar una cálida bienvenida al usuario por única vez
             2. Explicar claramente las opciones disponibles en el menú principal:
             - Iniciar sesión si ya tiene una cuenta (opción 1).
             - Crear una nueva cuenta (opción 2).
@@ -124,6 +126,7 @@ class Chat:
             - Preguntar a RentaBot asistente IA (opción 4).
             - Salir de la aplicación (opción 5).
             3. Responder de manera eficiente y amigable cualquier consulta que el usuario tenga.
+            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto.
             
             CAPACIDADES:
             El usuario puede que te escriba algunas de las opciones mencionadas en el menú, si esto sucede
