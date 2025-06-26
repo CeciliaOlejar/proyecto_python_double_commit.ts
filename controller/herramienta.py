@@ -124,3 +124,31 @@ class Herramienta_DAO:
                 return cursor.rowcount, nombre
         except Exception as e:
             print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error {e}{Style.RESET_ALL}")
+
+    @classmethod
+    def buscar_por_nombre(cls, nombre: str) -> list:
+        try:
+            with Conexion.obtener_conexion() as conexion:
+                cursor = conexion.cursor()
+                consulta = "SELECT * FROM herramienta WHERE LOWER(nombre) LIKE %s"
+                cursor.execute(consulta, (f"%{nombre.lower()}%",))
+                registros = cursor.fetchall()
+                herramientas = []
+                for registro in registros:
+                    herramienta = Herramienta(
+                        registro[0],
+                        registro[1],
+                        registro[2],
+                        registro[3],
+                        registro[4],
+                        registro[5],
+                        registro[6],
+                        registro[7],
+                        registro[8],
+                        registro[9],
+                    )
+                    herramientas.append(herramienta)
+                return herramientas
+        except Exception as e:
+            print(f"{Fore.RED}{Style.BRIGHT}Error al buscar herramienta: {e}{Style.RESET_ALL}")
+            return []
