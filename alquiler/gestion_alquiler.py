@@ -1,7 +1,6 @@
 from models.Usuario import Usuario
 from models.Herramienta import Herramienta
 
-
 class GestionAlquiler(Usuario, Herramienta):
     def __init__(self, nombre, apellido, email, fecha_alquiler):
         super().__init__(nombre, apellido, email)
@@ -15,7 +14,7 @@ class GestionAlquiler(Usuario, Herramienta):
     def fecha_alquiler(self, fecha_alquiler):
         self._fecha_alquiler = fecha_alquiler
     
-    def calcular_precio_alquiler(self, dias, precio_por_dia):
+    def calcular_precio_alquiler(self, dias: int, precio_por_dia: int):
         return dias * precio_por_dia
     
     def __str__(self):
