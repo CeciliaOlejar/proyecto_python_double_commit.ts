@@ -7,6 +7,7 @@ from utils.ubicacion import obtener_ubicacion
 
 
 class Usuario_DAO:
+    _usuario_actual = None 
     _SELECCIONAR_USUARIO = "SELECT * FROM usuario ORDER BY id_usuario"
     _INSERTAR_USUARIO = """
     INSERT INTO usuario(nombre, apellido, email, contrasenia)
@@ -43,6 +44,14 @@ class Usuario_DAO:
                 print(f"{Fore.BLUE}{Style.BRIGHT}{usuario}{Style.RESET_ALL}")
         except Exception as e:
             print(f"Error al crear usuario: {e}")
+            
+    @classmethod
+    def set_usuario_actual(cls, usuario: Usuario):
+        cls._usuario_actual = usuario
+
+    @classmethod
+    def obtener_usuario_actual(cls):
+        return cls._usuario_actual
 
     @classmethod
     def ingresar(cls, usuario: Usuario, Chat: object):
@@ -68,12 +77,13 @@ class Usuario_DAO:
                     print(
                         f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
                     )
+                    cls.set_usuario_actual(usuario)  # <-- Guarda el usuario actual
                     catalogo = Herramienta_DAO.listar_herramientas()
                     ciudad, pais = obtener_ubicacion()
                     Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
         except Exception as e:
             print(f"Ocurrió un error: {e}")
-
+            
     @classmethod
     def leer_usuarios(cls):
         """Obtiene todos los usuarios de la base de datos."""
@@ -125,3 +135,4 @@ class Usuario_DAO:
                 print(f"El usuario: {usuario}, se ha eliminado exitosamente.")
         except Exception as e:
             print(f"Error al eliminar usuario: {e}")
+
