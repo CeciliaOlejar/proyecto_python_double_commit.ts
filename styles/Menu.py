@@ -73,3 +73,19 @@ class Menu:
         ingreso_usuario = Usuario(nombre, apellido, email, contrasenia)
         return ingreso_usuario
 
+    @staticmethod
+    def explorar_herramientas():
+        text = textwrap.dedent(f"""
+        {Fore.MAGENTA}{Style.BRIGHT}
+        
+        ╔════════════════════════════════════════════════════════════╗
+        ║               Explorar Herramientas Disponibles            ║
+        ╠════════════════════════════════════════════════════════════╣
+        ║  1. Listar todas las herramientas                          ║
+        ║  2. Buscar por nombre                                      ║
+        ║  3. Volver al menú principal                               ║
+        ╚════════════════════════════════════════════════════════════╝
+        {Style.RESET_ALL}""")
+        consola(text)
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-4): {Style.RESET_ALL}")
+        return int(opcion)
