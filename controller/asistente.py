@@ -72,7 +72,7 @@ class ProcesadorMensajes:
 
 class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
-    
+
     @staticmethod
     def ejecutar_opcion(option: str) -> bool:
         """Ejecuta una opción y retorna True si debe continuar el bucle"""
@@ -88,11 +88,69 @@ class ManejadorDeOpciones:
             return True
         elif option == "3":
             print(f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Explorar herramientas{Style.RESET_ALL}")
-            print(f"{Fore.WHITE}{Style.BRIGHT}Explorando herramientas disponibles...{Style.RESET_ALL}")
-            herramientas = Herramienta_DAO.listar_herramientas()
-            for herramienta in herramientas:
-                print(herramienta)
+            while True:
+                subopcion = Menu.explorar_herramientas()
+                if subopcion == 1:
+                    herramientas = Herramienta_DAO.listar_herramientas()
+                    if not herramientas:
+                        print(
+                            f"{Fore.YELLOW}{Style.BRIGHT}No hay herramientas registradas.{Style.RESET_ALL}"
+                        )
+                        continue
+                    print(f"{Fore.WHITE}{Style.BRIGHT}Listado de herramientas:{Style.RESET_ALL}")
+                    for herramienta in herramientas:
+                        print(herramienta)
+                elif subopcion == 2:
+                    nombre = input(
+                        f"{Fore.YELLOW}{Style.BRIGHT}Ingrese el nombre de la herramienta: {Style.RESET_ALL}"
+                    )
+                    resultados = Herramienta_DAO.buscar_por_nombre(nombre)
+                    if not resultados:
+                        print(
+                            f"{Fore.YELLOW}{Style.BRIGHT}No se encontraron herramientas con ese nombre.{Style.RESET_ALL}"
+                        )
+                        continue
+                    print(f"{Fore.WHITE}{Style.BRIGHT}Resultados de búsqueda:{Style.RESET_ALL}")
+                    for herramienta in resultados:
+                        print(herramienta)
+                elif subopcion == 3:
+                    print(
+                        f"{Fore.YELLOW}{Style.BRIGHT}Volviendo al menú principal...{Style.RESET_ALL}"
+                    )
+                    break
+                else:
+                    print(
+                        f"{Fore.RED}{Style.BRIGHT}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
+                    )
             return True
+        # ...existing code...
+        # elif option == "3":
+        #     print(f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Explorar herramientas{Style.RESET_ALL}")
+        #     while True:
+        #         subopcion = Menu.explorar_herramientas()
+        #         if subopcion == 1:
+        #             herramientas = Herramienta_DAO.listar_herramientas()
+        #             print(f"{Fore.WHITE}{Style.BRIGHT}Listado de herramientas:{Style.RESET_ALL}")
+        #             for herramienta in herramientas:
+        #                 print(herramienta)
+        #         elif subopcion == 2:
+        #             nombre = input(f"{Fore.YELLOW}Ingrese el nombre de la herramienta: {Style.RESET_ALL}")
+        #             resultados = Herramienta_DAO.buscar_por_nombre(nombre)
+        #             print(f"{Fore.WHITE}{Style.BRIGHT}Resultados de búsqueda:{Style.RESET_ALL}")
+        #             for herramienta in resultados:
+        #                 print(herramienta)
+        #         elif subopcion == 3:
+        #             categoria = input(f"{Fore.YELLOW}Ingrese la categoría: {Style.RESET_ALL}")
+        #             resultados = Herramienta_DAO.filtrar_por_categoria(categoria)
+        #             print(f"{Fore.WHITE}{Style.BRIGHT}Herramientas en la categoría '{categoria}':{Style.RESET_ALL}")
+        #             for herramienta in resultados:
+        #                 print(herramienta)
+        #         elif subopcion == 4:
+        #             print(f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}")
+        #             break
+        #         else:
+        #             print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
+        #     return True
         elif option == "4":
             print(f"{Fore.CYAN}{Style.BRIGHT}Continuando conversación con RentaBot...{Style.RESET_ALL}")
             nombre = input(f"{Fore.GREEN}{Style.BRIGHT}Escribe tu nombre: {Style.RESET_ALL}")
