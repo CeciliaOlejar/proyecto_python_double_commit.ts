@@ -96,9 +96,9 @@ class Usuario_DAO:
                         Menu.menu_admin()
                     else:
                         Menu.principal()
-                    catalogo = Herramienta_DAO.listar_herramientas()
-                    ciudad, pais = obtener_ubicacion()
-                    Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
+                        catalogo = Herramienta_DAO.listar_herramientas()
+                        ciudad, pais = obtener_ubicacion()
+                        Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
                     break
         except Exception as e:
             print(f"Ocurrió un error al ingresar a la app: {e}")
