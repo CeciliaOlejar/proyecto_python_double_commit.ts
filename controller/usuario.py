@@ -7,7 +7,7 @@ from utils.ubicacion import obtener_ubicacion
 
 
 class Usuario_DAO:
-    _usuario_actual = None 
+    _usuario_actual = None
     _SELECCIONAR_USUARIO = "SELECT * FROM usuario ORDER BY id_usuario"
     _INSERTAR_USUARIO = """
     INSERT INTO usuario(nombre, apellido, email, contrasenia)
@@ -44,7 +44,7 @@ class Usuario_DAO:
                 print(f"{Fore.BLUE}{Style.BRIGHT}{usuario}{Style.RESET_ALL}")
         except Exception as e:
             print(f"Error al crear usuario: {e}")
-            
+
     @classmethod
     def set_usuario_actual(cls, usuario: Usuario):
         cls._usuario_actual = usuario
@@ -53,43 +53,45 @@ class Usuario_DAO:
     def obtener_usuario_actual(cls):
         return cls._usuario_actual
 
-# ...existing code...
     @classmethod
     def ingresar(cls, usuario: Usuario, Chat: object):
         try:
             while True:
-                with Conexion.obtener_conexion():
-                    with Conexion.obtener_cursor() as cursor:
-                        cursor.execute(
-                            cls._VERIFICAR_USUARIO,
-                            (
-                                usuario.email,
-                                usuario.contrasenia,
-                            ),
-                        )
-                        usuarios_existentes = cursor.fetchall()
-                        if not usuarios_existentes:
-                            print(
-                                f"{Fore.YELLOW}{Style.BRIGHT}Datos incorrectos. ¿Desea intentar de nuevo? (s/n){Style.RESET_ALL}"
-                            )
-                            opcion = input().lower()
-                            if opcion in ["Si", "s", "si"]:
-                                usuario = Menu.login()  # Vuelve a pedir los datos
-                                continue
-                            else:
-                                print(f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}")
-                                return
+                with Conexion.obtener_conexion() as conexion:
+                    cursor = conexion.cursor()
+
+                    cursor.execute(
+                        cls._VERIFICAR_USUARIO,
+                        (
+                            usuario.email,
+                            usuario.contrasenia,
+                        ),
+                    )
+                    usuarios_existentes = cursor.fetchall()
+                    if not usuarios_existentes:
                         print(
-                            f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
+                            f"{Fore.YELLOW}{Style.BRIGHT}Datos incorrectos. ¿Desea intentar de nuevo? (s/n){Style.RESET_ALL}"
                         )
-                        cls.set_usuario_actual(usuario)
-                        catalogo = Herramienta_DAO.listar_herramientas()
-                        ciudad, pais = obtener_ubicacion()
-                        Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
-                        break
+                        opcion = input().lower()
+                        if opcion in ["Si", "s", "si"]:
+                            usuario = Menu.login()  # Vuelve a pedir los datos
+                            continue
+                        else:
+                            print(
+                                f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
+                            )
+                            return
+                    print(
+                        f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
+                    )
+                    cls.set_usuario_actual(usuario)
+                    catalogo = Herramienta_DAO.listar_herramientas()
+                    ciudad, pais = obtener_ubicacion()
+                    Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
+                    break
         except Exception as e:
             print(f"Ocurrió un error al ingresar a la app: {e}")
-            
+
     @classmethod
     def leer_usuarios(cls):
         """Obtiene todos los usuarios de la base de datos."""
@@ -107,19 +109,19 @@ class Usuario_DAO:
     def actualizar_usuario(cls, usuario: Usuario):
         """Actualiza los datos de un usuario existente."""
         try:
-            with Conexion.obtener_conexion():
-                with Conexion.obtener_cursor() as cursor:
-                    cursor.execute(
-                        cls._ACTUALIZAR_USUARIO,
-                        (
-                            usuario.nombre,
-                            usuario.apellido,
-                            usuario.email,
-                            usuario.contrasenia,
-                            usuario.id_usuario,
-                        ),
-                    )
-                    print("Usuario actualizado exitosamente.")
+            with Conexion.obtener_conexion() as conexion:
+                cursor = conexion.cursor()
+                cursor.execute(
+                    cls._ACTUALIZAR_USUARIO,
+                    (
+                        usuario.nombre,
+                        usuario.apellido,
+                        usuario.email,
+                        usuario.contrasenia,
+                        usuario.id_usuario,
+                    ),
+                )
+                print("Usuario actualizado exitosamente.")
         except Exception as e:
             print(f"Error al actualizar usuario: {e}")
 
@@ -141,4 +143,3 @@ class Usuario_DAO:
                 print(f"El usuario: {usuario}, se ha eliminado exitosamente.")
         except Exception as e:
             print(f"Error al eliminar usuario: {e}")
-
