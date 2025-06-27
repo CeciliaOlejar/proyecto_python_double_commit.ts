@@ -89,3 +89,19 @@ class Menu:
         consola(text)
         opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-4): {Style.RESET_ALL}")
         return int(opcion)
+
+    @staticmethod
+    def menu_admin():
+        text = textwrap.dedent(f"""
+        {Fore.RED}{Style.BRIGHT}
+        ╔════════════════════════════════════════════════════════════╗
+        ║                  Panel de Administración                   ║
+        ╠════════════════════════════════════════════════════════════╣
+        ║  1. Gestionar usuarios                                     ║
+        ║  2. Gestionar herramientas                                 ║
+        ║  3. Volver al menú principal                               ║
+        ╚════════════════════════════════════════════════════════════╝
+        {Style.RESET_ALL}""")
+        consola(text)
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-4): {Style.RESET_ALL}")
+        return int(opcion)

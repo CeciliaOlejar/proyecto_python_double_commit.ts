@@ -10,15 +10,14 @@ class Usuario_DAO:
     _usuario_actual = None
     _SELECCIONAR_USUARIO = "SELECT * FROM usuario ORDER BY id_usuario"
     _INSERTAR_USUARIO = """
-    INSERT INTO usuario(nombre, apellido, email, contrasenia)
-    VALUES (%s, %s, %s, %s)
+    INSERT INTO usuario(nombre, apellido, email, contrasenia, rol)
+    VALUES (%s, %s, %s, %s, %s)
     """
-    _VERIFICAR_USUARIO = (
-        "SELECT email, contrasenia FROM usuario WHERE email=%s AND contrasenia=%s"
-    )
+    _VERIFICAR_USUARIO = "SELECT id_usuario, nombre, apellido, email, contrasenia, rol FROM usuario WHERE email=%s AND contrasenia=%s"
+
     _ACTUALIZAR_USUARIO = """
     UPDATE usuario
-    SET nombre=%s, apellido=%s, email=%s, contrasenia=%s
+    SET nombre=%s, apellido=%s, email=%s, contrasenia=%s, rol=%s,
     WHERE id_usuario=%s
     """
     _ELIMINAR_USUARIO = "DELETE FROM usuario WHERE id_usuario=%s"
@@ -36,6 +35,7 @@ class Usuario_DAO:
                         usuario.apellido,
                         usuario.email,
                         usuario.contrasenia,
+                        usuario.rol,
                     ),
                 )
                 print(
@@ -81,16 +81,28 @@ class Usuario_DAO:
                                 f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
                             )
                             return
+                    usuario_db = usuarios_existentes[0]
+                    usuario.id_usuario = usuario_db[0]
+                    usuario.nombre = usuario_db[1]
+                    usuario.apellido = usuario_db[2]
+                    usuario.email = usuario_db[3]
+                    usuario.contrasenia = usuario_db[4]
+                    usuario.rol = usuario_db[5]
                     print(
                         f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
                     )
                     cls.set_usuario_actual(usuario)
+                    if usuario.rol == 1:
+                        Menu.menu_admin()
+                    else:
+                        Menu.principal()
                     catalogo = Herramienta_DAO.listar_herramientas()
                     ciudad, pais = obtener_ubicacion()
                     Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
                     break
         except Exception as e:
             print(f"Ocurrió un error al ingresar a la app: {e}")
+            return
 
     @classmethod
     def leer_usuarios(cls):
