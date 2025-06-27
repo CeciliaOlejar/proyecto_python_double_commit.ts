@@ -73,7 +73,7 @@ class Usuario_DAO:
                                 f"{Fore.YELLOW}{Style.BRIGHT}Datos incorrectos. ¿Desea intentar de nuevo? (s/n){Style.RESET_ALL}"
                             )
                             opcion = input().lower()
-                            if opcion == "s":
+                            if opcion in ["Si", "s", "si"]:
                                 usuario = Menu.login()  # Vuelve a pedir los datos
                                 continue
                             else:
@@ -88,38 +88,7 @@ class Usuario_DAO:
                         Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
                         break
         except Exception as e:
-            print(f"Ocurrió un error: {e}")
-# ...existing code...
-    # @classmethod
-    # def ingresar(cls, usuario: Usuario, Chat: object):
-    #     try:
-    #         with Conexion.obtener_conexion():
-    #             with Conexion.obtener_cursor() as cursor:
-    #                 cursor.execute(
-    #                     cls._VERIFICAR_USUARIO,
-    #                     (
-    #                         usuario.email,
-    #                         usuario.contrasenia,
-    #                     ),
-    #                 )
-    #                 usuarios_existentes = cursor.fetchall()
-    #                 if not usuarios_existentes:
-    #                     print(
-    #                         f"{Fore.YELLOW}{Style.BRIGHT}Cuenta inexistente. Cree una cuenta para poder ingresar a ConstruRent.{Style.RESET_ALL}"
-    #                     )
-    #                     print(
-    #                         f"{Fore.GREEN}{Style.BRIGHT}Usuario {usuario}{Style.RESET_ALL}"
-    #                     )
-    #                     Menu.registro()
-    #                 print(
-    #                     f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
-    #                 )
-    #                 cls.set_usuario_actual(usuario)  # <-- Guarda el usuario actual
-    #                 catalogo = Herramienta_DAO.listar_herramientas()
-    #                 ciudad, pais = obtener_ubicacion()
-    #                 Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
-    #     except Exception as e:
-    #         print(f"Ocurrió un error: {e}")
+            print(f"Ocurrió un error al ingresar a la app: {e}")
             
     @classmethod
     def leer_usuarios(cls):
