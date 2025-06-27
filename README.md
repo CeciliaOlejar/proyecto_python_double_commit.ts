@@ -109,7 +109,7 @@ CREATE TABLE herramienta (
     fecha_adquisicion DATE NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
     precio_por_dia DECIMAL(10,2) NOT NULL CHECK (precio_por_dia > 0),
-    estado VARCHAR(20) DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'Rentado', 'En Mantenimiento', 'Fuera de Servicio'))
+    estado VARCHAR(20) DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'Alquilado', 'En Mantenimiento', 'Fuera de Servicio'))
 );
 ```
 - Crear tabla para usuarios:
