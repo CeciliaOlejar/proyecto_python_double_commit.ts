@@ -21,12 +21,12 @@ class Menu:
         ╚════════════════════════════════════════════════════════════╝
         """)
         consola(text)
-    
+
     @staticmethod
     def opcion() -> int:
         opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
         return int(opcion)
-    
+
     @staticmethod
     def registro():
         text = textwrap.dedent(f"""
@@ -92,18 +92,21 @@ class Menu:
 
     @staticmethod
     def menu_admin():
-        text = textwrap.dedent(f"""
+        text = textwrap.dedent(
+            f"""
         {Fore.RED}{Style.BRIGHT}
         ╔════════════════════════════════════════════════════════════╗
         ║                  Panel de Administración                   ║
         ╠════════════════════════════════════════════════════════════╣
         ║  1. Gestionar usuarios                                     ║
         ║  2. Gestionar herramientas                                 ║
-        ║  3. Volver al menú principal                               ║
+        ║  3. Gestionar Tickets                                      ║
+        ║  4. Volver al menú principal                               ║
         ╚════════════════════════════════════════════════════════════╝
-        {Style.RESET_ALL}""")
+        {Style.RESET_ALL}"""
+        )
         consola(text)
-        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-3): {Style.RESET_ALL}")
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-4): {Style.RESET_ALL}")
         return int(opcion)
 
 @staticmethod
@@ -111,13 +114,49 @@ def menu_gestionar_usuarios():
     text = textwrap.dedent(f"""
     {Fore.CYAN}{Style.BRIGHT}
     ╔════════════════════════════════════════════════════════════╗
-    ║                   Gestión de Usuarios                     ║
+    ║                   Gestión de Usuarios                      ║
     ╠════════════════════════════════════════════════════════════╣
-    ║  1. Listar usuarios                                       ║
-    ║  2. Registrar usuario admin                               ║
-    ║  3. Eliminar usuario                                      ║
-    ║  4. Modificar usuario                                     ║
-    ║  5. Volver al menú anterior                               ║
+    ║  1. Listar usuarios                                        ║
+    ║  2. Registrar usuario admin                                ║
+    ║  3. Eliminar usuario                                       ║
+    ║  4. Modificar usuario                                      ║ 
+    ║  5. Volver al menú anterior                                ║
+    ╚════════════════════════════════════════════════════════════╝
+    {Style.RESET_ALL}""")
+    consola(text)
+    opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
+    return int(opcion)
+
+@staticmethod
+def menu_gestionar_herramientas():
+    text = textwrap.dedent(f"""
+    {Fore.YELLOW}{Style.BRIGHT}
+    ╔════════════════════════════════════════════════════════════╗
+    ║                Gestión de Herramientas                     ║
+    ╠════════════════════════════════════════════════════════════╣
+    ║  1. Listar herramientas                                    ║
+    ║  2. Registrar herramienta                                  ║
+    ║  3. Eliminar herramienta                                   ║
+    ║  4. Modificar herramienta                                  ║
+    ║  5. Volver al menú anterior                                ║
+    ╚════════════════════════════════════════════════════════════╝
+    {Style.RESET_ALL}""")
+    consola(text)
+    opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
+    return int(opcion)
+
+@staticmethod
+def menu_gestionar_tickets():
+    text = textwrap.dedent(f"""
+    {Fore.MAGENTA}{Style.BRIGHT}
+    ╔════════════════════════════════════════════════════════════╗
+    ║                   Gestión de Tickets                       ║
+    ╠════════════════════════════════════════════════════════════╣
+    ║  1. Listar tickets                                         ║
+    ║  2. Buscar ticket por ID                                   ║
+    ║  3. Eliminar ticket                                        ║
+    ║  4. Modificar ticket                                       ║
+    ║  5. Volver al menú anterior                                ║
     ╚════════════════════════════════════════════════════════════╝
     {Style.RESET_ALL}""")
     consola(text)

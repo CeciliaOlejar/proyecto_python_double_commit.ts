@@ -178,7 +178,7 @@ class ManejadorDeOpciones:
                             f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
                         )
                         break
-                    # buscar herramientas por nombre 
+                    # buscar herramientas por nombre
                     elif subopcion == 2:
                         salir_menu_explorar = False
                         nombre = input(
@@ -254,7 +254,7 @@ class ManejadorDeOpciones:
                             f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
                         )
                         break
-                    
+
                     # volver al menú principal
                     elif subopcion == 3:
                         print(
@@ -266,7 +266,7 @@ class ManejadorDeOpciones:
                             f"{Fore.RED}{Style.BRIGHT}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
                         )
                 return True
-            
+
         elif option == "4":
             print(
                 f"{Fore.CYAN}{Style.BRIGHT}Continuando conversación con RentaBot...{Style.RESET_ALL}"
@@ -294,22 +294,106 @@ class ManejadorDeOpciones:
         while True:
             opcion = Menu.menu_admin()
             if opcion == 1:
-                print(f"{Fore.CYAN}{Style.BRIGHT}--- Gestión de Usuarios ---{Style.RESET_ALL}")
-                usuarios = Usuario_DAO.leer_usuarios()
-                if not usuarios:
-                    print(f"{Fore.YELLOW}No hay usuarios registrados.{Style.RESET_ALL}")
-                else:
-                    for usuario in usuarios:
-                        print(usuario)
+                while True:
+                    subopcion = Menu.menu_gestionar_usuarios()
+                    if subopcion == 1:
+                        # Listar usuarios
+                        print(f"{Fore.CYAN}Gestión de Usuarios{Style.RESET_ALL}")
+                        usuarios = Usuario_DAO.leer_usuarios()
+                        if not usuarios:
+                            print(f"{Fore.YELLOW}No hay usuarios registrados.{Style.RESET_ALL}")
+                        else:
+                            for usuario in usuarios:
+                                print(usuario)
+                    elif subopcion == 2:
+                        # Registrar usuario admin
+                        print(f"{Fore.CYAN}Registrar nuevo usuario admin:{Style.RESET_ALL}")
+                        nombre = input("Nombre: ")
+                        apellido = input("Apellido: ")
+                        email = input("Email: ")
+                        contrasenia = input("Contraseña: ")
+                        usuario_admin = usuario(nombre, apellido, email, contrasenia, 1)
+                        Usuario_DAO.crear_usuario(usuario_admin)
+                    elif subopcion == 3:
+                        # Eliminar usuario
+                        id_usuario = input("Ingrese el ID del usuario a eliminar: ")
+                        Usuario_DAO.eliminar_usuario(id_usuario)
+                    elif subopcion == 4:
+                        # Modificar usuario
+                        id_usuario = input("Ingrese el ID del usuario a modificar: ")
+                        # Aquí puedes pedir los nuevos datos y llamar a Usuario_DAO.actualizar_usuario(...)
+                        print("Funcionalidad de modificar usuario aún no implementada.")
+                    elif subopcion == 5:
+                        print(f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}")
+                        break
+                    else:
+                        print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
             elif opcion == 2:
-                print(f"{Fore.CYAN}Gestión de herramientas (aquí va la lógica de gestión de herramientas){Style.RESET_ALL}")
+                print(f"{Fore.CYAN}Gestión de herramientas{Style.RESET_ALL}")
+                while True:
+                    subopcion = Menu.menu_gestionar_herramientas()
+                    if subopcion == 1:
+                        # Listar herramientas
+                        herramientas = Herramienta_DAO.listar_herramientas()
+                        if not herramientas:
+                            print(f"{Fore.YELLOW}No hay herramientas registradas.{Style.RESET_ALL}")
+                        else:
+                            for herramienta in herramientas:
+                                print(herramienta)
+                    elif subopcion == 2:
+                        # Registrar herramienta
+                        print(f"{Fore.CYAN}Registrar nueva herramienta:{Style.RESET_ALL}")
+                        # Aquí puedes pedir los datos y llamar a Herramienta_DAO.crear_herramienta(...)
+                        print("Funcionalidad de registrar herramienta aún no implementada.")
+                    elif subopcion == 3:
+                        # Eliminar herramienta
+                        id_herramienta = input("Ingrese el ID de la herramienta a eliminar: ")
+                        Herramienta_DAO.eliminar(id_herramienta)
+                    elif subopcion == 4:
+                        # Modificar herramienta
+                        id_herramienta = input("Ingrese el ID de la herramienta a modificar: ")
+                        # Aquí puedes pedir los nuevos datos y llamar a Herramienta_DAO.actualizar_herramienta(...)
+                        print("Funcionalidad de modificar herramienta aún no implementada.")
+                    elif subopcion == 5:
+                        print(f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}")
+                        break
+                    else:
+                        print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
             elif opcion == 3:
-                print(f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}")
-                break
-            else:
-                print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
+                print(f"{Fore.MAGENTA}Gestión de tickets{Style.RESET_ALL}")
+                while True:
+                    subopcion = Menu.menu_gestionar_tickets()
+                    if subopcion == 1:
+                        # Listar tickets
+                        tickets = Ticket_DAO.listar_tickets()
+                        if not tickets:
+                            print(f"{Fore.YELLOW}No hay tickets registrados.{Style.RESET_ALL}")
+                        else:
+                            for ticket in tickets:
+                                print(ticket)
+                    elif subopcion == 2:
+                        # Buscar ticket por ID
+                        id_ticket = input("Ingrese el ID del ticket a buscar: ")
+                        ticket = Ticket_DAO.buscar_por_id(id_ticket)
+                        if ticket:
+                            print(ticket)
+                        else:
+                            print(f"{Fore.YELLOW}No se encontró el ticket con ese ID.{Style.RESET_ALL}")
+                    elif subopcion == 3:
+                        # Eliminar ticket
+                        id_ticket = input("Ingrese el ID del ticket a eliminar: ")
+                        Ticket_DAO.eliminar_ticket(id_ticket)
+                    elif subopcion == 4:
+                        # Modificar ticket
+                        id_ticket = input("Ingrese el ID del ticket a modificar: ")
+                        # Aquí puedes pedir los nuevos datos y llamar a Ticket_DAO.actualizar_ticket(...)
+                        print("Funcionalidad de modificar ticket aún no implementada.")
+                    elif subopcion == 5:
+                        print(f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}")
+                        break
+                    else:
+                        print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
                 
-
 
 
 class Chat:
