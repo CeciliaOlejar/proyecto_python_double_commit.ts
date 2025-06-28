@@ -294,7 +294,13 @@ class ManejadorDeOpciones:
         while True:
             opcion = Menu.menu_admin()
             if opcion == 1:
-                ManejadorDeOpciones.gestionar_usuarios()
+                print(f"{Fore.CYAN}{Style.BRIGHT}--- Gestión de Usuarios ---{Style.RESET_ALL}")
+            usuarios = Usuario_DAO.leer_usuarios()
+            if not usuarios:
+                print(f"{Fore.YELLOW}No hay usuarios registrados.{Style.RESET_ALL}")
+                return
+                for usuario in usuarios:
+                    print(usuario)
             elif opcion == 2:
                 print(f"{Fore.CYAN}Gestión de herramientas (aquí va la lógica de gestión de herramientas){Style.RESET_ALL}")
                 # Aquí puedes llamar a un método para gestionar herramientas
@@ -304,17 +310,6 @@ class ManejadorDeOpciones:
             else:
                 print(f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}")
                 
-    @staticmethod
-    def gestionar_usuarios():
-        print(f"{Fore.CYAN}{Style.BRIGHT}--- Gestión de Usuarios ---{Style.RESET_ALL}")
-        usuarios = Usuario_DAO.leer_usuarios()
-        if not usuarios:
-            print(f"{Fore.YELLOW}No hay usuarios registrados.{Style.RESET_ALL}")
-            return
-        for usuario in usuarios:
-            print(usuario)
-
-
 
 
 
