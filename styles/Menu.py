@@ -47,7 +47,7 @@ class Menu:
         print(textwrap.dedent(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """))
-        registro = Usuario(nombre, apellido, email, contrasenia)
+        registro = Usuario(nombre, apellido, email, contrasenia, 2)  # Rol por defecto es 2 (usuario normal)
         return registro
 
     @staticmethod
@@ -103,5 +103,23 @@ class Menu:
         ╚════════════════════════════════════════════════════════════╝
         {Style.RESET_ALL}""")
         consola(text)
-        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-4): {Style.RESET_ALL}")
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-3): {Style.RESET_ALL}")
         return int(opcion)
+
+@staticmethod
+def menu_gestionar_usuarios():
+    text = textwrap.dedent(f"""
+    {Fore.CYAN}{Style.BRIGHT}
+    ╔════════════════════════════════════════════════════════════╗
+    ║                   Gestión de Usuarios                     ║
+    ╠════════════════════════════════════════════════════════════╣
+    ║  1. Listar usuarios                                       ║
+    ║  2. Registrar usuario admin                               ║
+    ║  3. Eliminar usuario                                      ║
+    ║  4. Modificar usuario                                     ║
+    ║  5. Volver al menú anterior                               ║
+    ╚════════════════════════════════════════════════════════════╝
+    {Style.RESET_ALL}""")
+    consola(text)
+    opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
+    return int(opcion)
