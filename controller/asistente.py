@@ -2,7 +2,7 @@ from colorama import init, Fore, Style
 from utils.cohere_config import response_config
 from utils.resaltar import color_codigo
 import re  # módulo para expresiones regulares
-from playwright.sync_api import sync_playwright
+from buscador import BuscadorWeb
 from styles.Menu import Menu
 from controller.herramienta import Herramienta_DAO
 from controller.usuario import Usuario_DAO
@@ -23,34 +23,6 @@ class ConfiguracionChat:
     mostrar_saludo: bool = False
     habilitar_busqueda_web: bool = False
     habilitar_detec_opciones: bool = False
-
-
-class BuscadorWeb:
-    """Maneja las búsquedas web de forma separada"""
-
-    @staticmethod
-    def buscar(query: str) -> str:
-        """Realiza una búsqueda web usando Playwright (Web scrapping)"""
-        with sync_playwright() as playwright:
-            browser = playwright.chromium.launch(headless=True)
-            context = browser.new_context(
-                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113 Safari/537.36"
-            )
-            page = context.new_page()
-            try:
-                page.goto("https://duckduckgo.com")
-                page.fill("input[name='q']", query)
-                page.press("input[name='q']", "Enter")
-                page.wait_for_selector("a.result__a")
-                result = page.inner_text("body").strip()
-                return result
-            except Exception as e:
-                print(
-                    f"{Fore.RED}{Style.BRIGHT}❌ Error en búsqueda web: {e}{Style.RESET_ALL}"
-                )
-                return "No se pudo obtener información de la web."
-            finally:
-                browser.close()
 
 
 class ProcesadorMensajes:
