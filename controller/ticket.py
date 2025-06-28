@@ -17,20 +17,20 @@ class Ticket_DAO:
                 cursor.execute(
                     consulta,
                     (
-                        ticket.id_herramienta,
-                        ticket.nombre,
-                        ticket.tipo,
-                        ticket.descripcion,
-                        ticket.marca,
-                        ticket.modelo,
-                        ticket.fecha_adquisicion,
-                        ticket.ubicacion,
-                        ticket.precio_por_dia,
-                        ticket.estado,
-                        ticket._cliente.id_usuario,
-                        ticket._fecha_inicio,
-                        ticket._fecha_fin,
-                        ticket._estado_ticket,
+                        ticket.Usuario.id_usuario,      # id_usuario
+                        ticket.id_herramienta,           # id_herramienta
+                        ticket._estado_ticket,           # estado_ticket
+                        ticket.Usuario.nombre,          # cliente
+                        ticket.nombre,                   # nombre
+                        ticket.tipo,                     # tipo
+                        ticket.modelo,                   # modelo
+                        ticket.marca,                    # marca
+                        ticket.descripcion,              # descripcion
+                        ticket.fecha_adquisicion,        # fecha_adquisicion
+                        ticket.precio_por_dia,           # precio_por_dia
+                        ticket.ubicacion,                # ubicacion
+                        ticket._fecha_fin,               # fecha_fin
+                        ticket._fecha_inicio,            # fecha_inicio
                     ),
                 )
                 conexion.commit()
