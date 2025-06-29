@@ -9,7 +9,7 @@ class BuscadorWeb:
     def buscar(cls, query: str) -> str:
         """Realiza una búsqueda web usando Playwright (Web scrapping)"""
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch(headless=False, slow_mo=50)
+            browser = playwright.chromium.launch(headless=True)
             context = browser.new_context(
                 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113 Safari/537.36"
             )
