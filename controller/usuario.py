@@ -129,17 +129,27 @@ class Usuario_DAO:
         try:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
-                cursor.execute(
-                    cls._ACTUALIZAR_USUARIO,
-                    (
-                        usuario.nombre,
-                        usuario.apellido,
-                        usuario.email,
-                        usuario.contrasenia,
-                        usuario.id_usuario,
-                    ),
-                )
-                print("Usuario actualizado exitosamente.")
+                registros_existentes = cursor.fetchall()
+                if not registros_existentes:
+                    print(f"{Fore.YELLOW}{Style.BRIGHT}No hay usuarios")
+                    return
+                for registro in registros_existentes:
+                    registro = Usuario(nombre=registro[1], apellido=registro[2], email=registro[3], contrasenia=registro[4], rol=registro[5])
+                    if registro:
+                        cursor.execute(
+                        cls._ACTUALIZAR_USUARIO,
+                        (
+                            usuario.nombre,
+                            usuario.apellido,
+                            usuario.email,
+                            usuario.contrasenia,
+                            usuario.id_usuario,
+                        ),
+                    )
+                        print(f" {Fore.GREEN}{Style.BRIGHT}Usuario actualizado exitosamente: {usuario}{Style.RESET_ALL}")
+                    else:
+                        print(f"{Fore.YELLOW}{Style.BRIGHT}No existe el usuario a actualizar.{Style.RESET_ALL}")
+                        continue
         except Exception as e:
             print(f"Error al actualizar usuario: {e}")
 
