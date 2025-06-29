@@ -51,6 +51,12 @@ source .venv/bin/activate # Linux / MacOS
 pip install -r requirements.txt
 ```
 
+4. Para utilizar el asistente IA con web scraping, es necesario instalar los binarios de los motores (Chromium):
+
+```bash
+playwright install
+```
+
 ### 📦 Estructura del proyecto
 
 ```bash

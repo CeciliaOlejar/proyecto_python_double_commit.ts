@@ -1,16 +1,15 @@
 from colorama import init, Fore, Style
+from controller.herramienta import Herramienta_DAO
 from utils.cohere_config import response_config
 from utils.resaltar import color_codigo
 import re  # módulo para expresiones regulares
-from controller.buscador import BuscadorWeb
+from utils.buscador import BuscadorWeb
 from controller.manejador_opciones import ManejadorDeOpciones
 from utils.ubicacion import obtener_ubicacion
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 
 init()
-
-
 # El decorador @dataclass en Python se utiliza para simplificar la creación de clases que son principalmente contenedores de datos
 @dataclass
 class ConfiguracionChat:
@@ -56,8 +55,9 @@ class Chat:
         if tipo == "bienvenida":
             ciudad = kwargs.get("ciudad", "Ciudad")
             pais = kwargs.get("pais", "País")
+            catalogo = kwargs.get("catalogo", [])
             return f"""Tu nombre es RentaBot, un asistente virtual de la aplicación ConstruRent, especializada en el alquiler de herramientas.
-            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto.
+            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto y además del catálogo de herramientas disponibles {catalogo}.
             
             Tus objetivos al iniciar la aplicación son:
             1. Dar una cálida bienvenida al usuario de acuerdo a su ubicación por única vez
@@ -162,18 +162,18 @@ class Chat:
             while True:
                 # Obtener entrada del usuario
                 if config.habilitar_detec_opciones:
-                    user_input = input(
+                    ingreso_usuario = input(
                         f"{Fore.GREEN}{Style.BRIGHT}¿Qué opción eliges?\n"
                     ).strip()
                     Style.RESET_ALL
+                    break
                 else:
                     nombre_usuario = kwargs.get("nombre_usuario", "Usuario")
-                    user_input = input(
+                    ingreso_usuario = input(
                         f"🔹 {Fore.BLUE}{Style.BRIGHT}{nombre_usuario}{Style.RESET_ALL}: "
                     ).strip()
-
                 # Verificar condiciones de salida
-                if user_input.lower() in ["salir", "exit", "quit", "adiós"]:
+                if ingreso_usuario.lower() in ["salir", "exit", "quit", "adiós"]:
                     if config.habilitar_detec_opciones:
                         print(
                             f"{Fore.YELLOW}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}"
@@ -184,7 +184,7 @@ class Chat:
                         )
                     break
 
-                historial.append({"role": "user", "content": user_input})
+                historial.append({"role": "user", "content": ingreso_usuario})
 
                 # Procesar respuesta
                 bot_response, detected_option = Chat._procesar_respuesta_chat(
@@ -202,11 +202,11 @@ class Chat:
                     print(
                         f"{Fore.MAGENTA}{Style.BRIGHT}🎯 Opción detectada: {detected_option}{Style.RESET_ALL}"
                     )
-                    should_continue = ManejadorDeOpciones.ejecutar_opcion(
+                    continuar = ManejadorDeOpciones.ejecutar_opcion(
                         detected_option,
                         Chat
                     )
-                    if not should_continue:
+                    if continuar:
                         break
                 elif config.habilitar_detec_opciones and not detected_option:
                     print(
@@ -220,9 +220,10 @@ class Chat:
     def asistente_bienvenida() -> None:
         """Inicia el asistente de bienvenida"""
         ciudad, pais = obtener_ubicacion()
+        catalogo = Herramienta_DAO.listar_herramientas()
         config = ConfiguracionChat(
             mensaje_sistema=Chat._crear_mensaje_sistema(
-                "bienvenida", ciudad=ciudad, pais=pais
+                "bienvenida", ciudad=ciudad, pais=pais, catalogo=catalogo
             ),
             mostrar_saludo=True,
             habilitar_detec_opciones=True,
