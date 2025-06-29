@@ -1,3 +1,4 @@
+import textwrap
 from controller.herramienta import Herramienta_DAO
 from db.conexion import Conexion
 from models.Usuario import Usuario
@@ -89,13 +90,12 @@ class Usuario_DAO:
                     usuario.contrasenia = usuario_db[4]
                     usuario.rol = usuario_db[5]
                     print(
-                        f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario.nombre}{Style.RESET_ALL}"
-                    )
+                        textwrap.dedent(f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario}{Style.RESET_ALL}"
+                    ))
                     cls.set_usuario_actual(usuario)
                     if usuario.rol == 1:
                         Menu.menu_admin()
                     else:
-                        Menu.principal()
                         catalogo = Herramienta_DAO.listar_herramientas()
                         ciudad, pais = obtener_ubicacion()
                         Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)

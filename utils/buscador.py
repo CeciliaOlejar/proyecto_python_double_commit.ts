@@ -3,27 +3,42 @@ from colorama import Fore, Style
 
 class BuscadorWeb:
     """Maneja las búsquedas web de forma separada"""
+    
+    _LOADING = False
 
-    @staticmethod
-    def buscar(query: str) -> str:
+    @classmethod
+    def buscar(cls, query: str) -> str:
         """Realiza una búsqueda web usando Playwright (Web scrapping)"""
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch(headless=True)
+            browser = playwright.chromium.launch(headless=False)
             context = browser.new_context(
                 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113 Safari/537.36"
             )
             page = context.new_page()
             try:
+                cls._LOADING = True
                 page.goto("https://duckduckgo.com")
                 page.fill("input[name='q']", query)
                 page.press("input[name='q']", "Enter")
-                page.wait_for_selector("a.result__a")
+                page.wait_for_selector("a.result__a", timeout=5000)
                 result = page.inner_text("body").strip()
-                return result
+                return result, cls._LOADING
             except Exception as e:
                 print(
                     f"{Fore.RED}{Style.BRIGHT}❌ Error en búsqueda web: {e}{Style.RESET_ALL}"
                 )
+                cls._LOADING = False
                 return "No se pudo obtener información de la web."
             finally:
                 browser.close()
+                
+if __name__ == "__main__":
+    # Ejemplo de uso
+    buscador = BuscadorWeb()
+    resultado, cargando = buscador.buscar("Temeperatura actual en Concarán San Luis, Argentina")
+    if cargando:
+        print(f"{Fore.GREEN}✅ Búsqueda completada.{Style.RESET_ALL}")
+        print(f"Resultado de la búsqueda: {resultado}")
+    else:
+        print(f"{Fore.RED}❌ Búsqueda fallida.{Style.RESET_ALL}")
+        print(f"Resultado de la búsqueda: {resultado}")

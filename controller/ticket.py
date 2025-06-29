@@ -34,6 +34,6 @@ class Ticket_DAO:
                     ),
                 )
                 conexion.commit()
-                print("Ticket registrado correctamente.")
+                print(f"Ticket registrado correctamente: {ticket}")
         except Exception as e:
             print(f"Error al registrar ticket: {e}")

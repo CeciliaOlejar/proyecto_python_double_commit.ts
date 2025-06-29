@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+from controller.asistente import Chat
 from styles.Menu import Menu
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
@@ -9,23 +10,26 @@ class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
 
     @staticmethod
-    def ejecutar_opcion(option: str, Chat) -> bool:
+    def ejecutar_opcion(option: str | int, Chat: Chat) -> bool:
         """Ejecuta una opción y retorna True si debe continuar el bucle"""
-        if option == "1":
+        if option == "1" or option.startswith("<<opción: 1>>"):
             print(
                 f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Iniciar Sesión{Style.RESET_ALL}"
             )
             usuario = Menu.login()
             Usuario_DAO.ingresar(usuario, Chat)
             return True
-        elif option == "2":
+        elif option == "2" or option.startswith("<<opción: 2>>"):
             print(
                 f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Crear nueva cuenta{Style.RESET_ALL}"
             )
             usuario = Menu.registro()
             Usuario_DAO.crear_usuario(usuario)
+            catalogo = Herramienta_DAO.listar_herramientas()
+            ciudad, pais = obtener_ubicacion()
+            Chat.chat_interactivo(usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais)
             return True
-        elif option == "3":
+        elif option == "3" or option.startswith("<<opción: 3>>"):
             print(
                 f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Explorar herramientas{Style.RESET_ALL}"
             )
@@ -49,7 +53,12 @@ class ManejadorDeOpciones:
                         reservar = input(
                             f"{Fore.GREEN}¿Desea reservar alguna herramienta? (s/n): {Style.RESET_ALL}"
                         ).lower()
-                        if reservar == "s":
+                        if reservar is None or reservar == "":
+                            print(
+                                f"{Fore.RED}Por favor, ingrese una opción válida.{Style.RESET_ALL}"
+                            )
+                            continue
+                        if reservar in ["s", "si", "yes", "y"]:
                             id_herramienta = input(
                                 f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
                             )
@@ -65,10 +74,7 @@ class ManejadorDeOpciones:
                             from models.Ticket import Ticket
                             from datetime import datetime
 
-                            herramienta = next(
-                                (
-                                    h
-                                    for h in herramientas
+                            herramienta = next((h for h in herramientas
                                     if str(h.id_herramienta) == id_herramienta
                                 ),
                                 None,
@@ -114,7 +120,7 @@ class ManejadorDeOpciones:
                         )
                         break
                     # buscar herramientas por nombre
-                    elif subopcion == 2:
+                    elif subopcion == 2 or "2":
                         salir_menu_explorar = False
                         nombre = input(
                             f"{Fore.YELLOW}{Style.BRIGHT}Ingrese el nombre de la herramienta: {Style.RESET_ALL}"
@@ -133,7 +139,7 @@ class ManejadorDeOpciones:
                             reservar = input(
                                 f"{Fore.GREEN}¿Desea reservar alguna herramienta? (s/n): {Style.RESET_ALL}"
                             ).lower()
-                        if reservar == "s":
+                        if reservar in ["s", "si", "yes", "y"]:
                             id_herramienta = input(
                                 f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
                             )
@@ -186,7 +192,7 @@ class ManejadorDeOpciones:
                                 print(
                                     f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
                                 )
-                        elif reservar == "n":
+                        elif reservar in ["n", "no", "nope", "nada"]:
                             print(
                                 f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
                             )
@@ -210,7 +216,7 @@ class ManejadorDeOpciones:
                         )
                 return True
 
-        elif option == "4":
+        elif option == "4" or option.startswith("<<opción: 4>>"):
             print(
                 f"{Fore.CYAN}{Style.BRIGHT}Continuando conversación con RentaBot...{Style.RESET_ALL}"
             )
@@ -221,7 +227,7 @@ class ManejadorDeOpciones:
             ciudad, pais = obtener_ubicacion()
             Chat.chat_interactivo(nombre, catalogo, ciudad, pais)
             return True
-        elif option == "5":
+        elif option == "5" or 5:
             print(
                 f"{Fore.YELLOW}{Style.BRIGHT}🚪 Saliendo de la aplicación...{Style.RESET_ALL}"
             )
@@ -279,6 +285,7 @@ class ManejadorDeOpciones:
                         print(
                             f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
                         )
+                        continue
             elif opcion == 2:
                 print(f"{Fore.CYAN}Gestión de herramientas{Style.RESET_ALL}")
                 while True:

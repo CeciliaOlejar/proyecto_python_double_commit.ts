@@ -70,7 +70,7 @@ class Menu:
         print(textwrap.dedent(f"""{Fore.BLUE}╚════════════════════════════════════════════════════════════╝
         {Fore.YELLOW}Presiona Enter para continuar...{Style.RESET_ALL}
         """))
-        ingreso_usuario = Usuario(nombre, apellido, email, contrasenia)
+        ingreso_usuario = Usuario(nombre.strip(), apellido.strip(), email.strip(), contrasenia.strip())
         return ingreso_usuario
 
     @staticmethod

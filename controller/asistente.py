@@ -57,7 +57,7 @@ class Chat:
             pais = kwargs.get("pais", "País")
             catalogo = kwargs.get("catalogo", [])
             return f"""Tu nombre es RentaBot, un asistente virtual de la aplicación ConstruRent, especializada en el alquiler de herramientas.
-            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto y además del catálogo de herramientas disponibles {catalogo}.
+            - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto. Y además el catálogo de herramientas disponibles {catalogo}.
             
             Tus objetivos al iniciar la aplicación son:
             1. Dar una cálida bienvenida al usuario de acuerdo a su ubicación por única vez
@@ -71,7 +71,7 @@ class Chat:
             
             CAPACIDADES:
             El usuario puede que te escriba algunas de las opciones mencionadas en el menú, si esto sucede
-            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar Sesión" o "opción 1" responde con <<opción: 1>>."""
+            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar Sesión" u "opción 1" responde con <<opción: 1>> y así sucesivamente."""
 
         elif tipo == "interactivo":
             nombre_usuario = kwargs.get("nombre_usuario", "Usuario")
@@ -206,7 +206,9 @@ class Chat:
                         Chat
                     )
                     if continuar:
-                        break
+                        print(
+                            f"{Fore.GREEN}{Style.BRIGHT}✅ Opción ejecutada correctamente.{Style.RESET_ALL}"
+                        )
                 elif config.habilitar_detec_opciones and not detected_option:
                     print(
                         f"{Fore.YELLOW}{Style.BRIGHT}💬 No se detectó una opción específica, continuando conversación...{Style.RESET_ALL}"

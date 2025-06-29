@@ -12,5 +12,3 @@ venv/
 # Archivos de configuración
 .env
 .env.local
-
-/__pycache__/
