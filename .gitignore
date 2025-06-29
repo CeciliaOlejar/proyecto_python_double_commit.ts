@@ -3,7 +3,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.pyc
 
 # Entornos virtuales
 env/
@@ -13,3 +12,5 @@ venv/
 # Archivos de configuración
 .env
 .env.local
+
+/__pycache__/

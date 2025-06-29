@@ -166,7 +166,6 @@ class Chat:
                         f"{Fore.GREEN}{Style.BRIGHT}¿Qué opción eliges?\n"
                     ).strip()
                     Style.RESET_ALL
-                    break
                 else:
                     nombre_usuario = kwargs.get("nombre_usuario", "Usuario")
                     ingreso_usuario = input(
