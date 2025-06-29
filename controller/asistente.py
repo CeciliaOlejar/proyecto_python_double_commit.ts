@@ -63,7 +63,7 @@ class Chat:
             Tus objetivos al iniciar la aplicación son:
             1. Dar una cálida bienvenida al usuario de acuerdo a su ubicación por única vez
             2. Estas son las opciones disponibles en el menú principal (No es necesario explicarlas porque ya se dispone de un menú):
-            - Iniciar sesión si ya tiene una cuenta (opción 1).
+            - Iniciar sesión si ya tiene una cuenta <<opción: 1>>.
             - Crear una nueva cuenta (opción 2).
             - Explorar las herramientas disponibles para alquiler (opción 3).
             - Preguntar a RentaBot asistente IA (opción 4).
@@ -72,7 +72,7 @@ class Chat:
             
             CAPACIDADES:
             El usuario puede que te escriba algunas de las opciones mencionadas en el menú, si esto sucede
-            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar Sesión" u "opción 1" responde con <<opción: 1>> y así sucesivamente."""
+            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar sesión" u "opción 1" o si escribe el número de la opción, etc, responde con <<opción: [opción que corresponda]>>."""
 
         elif tipo == "interactivo":
             nombre_usuario = kwargs.get("nombre_usuario", "Usuario")
