@@ -8,6 +8,7 @@ from controller.manejador_opciones import ManejadorDeOpciones
 from utils.ubicacion import obtener_ubicacion
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
+from styles.Menu import Menu
 
 init()
 # El decorador @dataclass en Python se utiliza para simplificar la creación de clases que son principalmente contenedores de datos
@@ -181,6 +182,7 @@ class Chat:
                         print(
                             f"{Fore.YELLOW}{Style.BRIGHT}🔚 Sesión de chat finalizada.{Style.RESET_ALL}\n"
                         )
+                        Menu.principal()
                     break
 
                 historial.append({"role": "user", "content": ingreso_usuario})

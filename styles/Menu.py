@@ -162,3 +162,18 @@ class Menu:
         consola(text)
         opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-5): {Style.RESET_ALL}")
         return int(opcion)
+    
+    @staticmethod
+    def menu_usuario(usuario: Usuario):
+        text = textwrap.dedent(f"""
+        {Fore.GREEN}{Style.BRIGHT}
+        ╔════════════════════════════════════════════════════════════╗
+        ║                  Dashboard {usuario.nombre}                        
+        ╠════════════════════════════════════════════════════════════╣
+        ║  1. Listar herramientas                                    ║
+        ║  2. Salir                                                  ║
+        ╚════════════════════════════════════════════════════════════╝
+        {Style.RESET_ALL}""")
+        consola(text)
+        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-2): {Style.RESET_ALL}")
+        return int(opcion)

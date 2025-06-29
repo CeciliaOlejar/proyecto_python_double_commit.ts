@@ -1,5 +1,4 @@
 from colorama import Fore, Style
-from controller.asistente import Chat
 from styles.Menu import Menu
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
@@ -10,7 +9,7 @@ class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
 
     @staticmethod
-    def ejecutar_opcion(option: str | int, Chat: Chat) -> bool:
+    def ejecutar_opcion(option: str | int, Chat) -> bool:
         """Ejecuta una opción y retorna True si debe continuar el bucle"""
         if option == "1" or option.startswith("<<opción: 1>>"):
             print(
@@ -27,6 +26,7 @@ class ManejadorDeOpciones:
             Usuario_DAO.crear_usuario(usuario)
             catalogo = Herramienta_DAO.listar_herramientas()
             ciudad, pais = obtener_ubicacion()
+            Menu.menu_usuario(usuario)
             Chat.chat_interactivo(usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais)
             return True
         elif option == "3" or option.startswith("<<opción: 3>>"):
@@ -68,6 +68,7 @@ class ManejadorDeOpciones:
                                     f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
                                 )
                                 salir_menu_explorar = True
+                                Menu.principal()
                                 break
                             fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
                             fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
