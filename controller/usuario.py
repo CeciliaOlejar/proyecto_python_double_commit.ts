@@ -1,5 +1,4 @@
 import textwrap
-from controller.herramienta import Herramienta_DAO
 from db.conexion import Conexion
 from models.Usuario import Usuario
 from styles.Menu import Menu
@@ -55,7 +54,7 @@ class Usuario_DAO:
         return cls._usuario_actual
 
     @classmethod
-    def ingresar(cls, usuario: Usuario, Chat: object):
+    def ingresar(cls, usuario: Usuario):
         try:
             while True:
                 with Conexion.obtener_conexion() as conexion:
@@ -93,13 +92,7 @@ class Usuario_DAO:
                         textwrap.dedent(f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario}{Style.RESET_ALL}"
                     ))
                     cls.set_usuario_actual(usuario)
-                    if usuario.rol == 1:
-                        Menu.menu_admin()
-                    else:
-                        catalogo = Herramienta_DAO.listar_herramientas()
-                        ciudad, pais = obtener_ubicacion()
-                        Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
-                    break
+                    return usuario, usuario.rol # Salir del bucle si el usuario es válido
         except Exception as e:
             print(f"Ocurrió un error al ingresar a la app: {e}")
             return
@@ -111,8 +104,21 @@ class Usuario_DAO:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
                 cursor.execute(cls._SELECCIONAR_USUARIO)
+                registros = []
                 usuarios = cursor.fetchall()
-                return usuarios
+                if usuarios:
+                    for usuario in usuarios:
+                        id_usuario, nombre, apellido, email, contrasenia, rol = usuario
+                        registro = Usuario(
+                            nombre=nombre,
+                            apellido=apellido,
+                            email=email,
+                            contrasenia=contrasenia,
+                            rol=rol,
+                            id_usuario=id_usuario,
+                        )
+                        registros.append(registro)
+                return registros
         except Exception as e:
             print(f"Error al leer usuarios: {e}")
             return []

@@ -5,6 +5,7 @@ from controller.herramienta import Herramienta_DAO
 from controller.ticket import Ticket_DAO
 from utils.ubicacion import obtener_ubicacion
 
+
 class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
 
@@ -16,7 +17,15 @@ class ManejadorDeOpciones:
                 f"{Fore.CYAN}{Style.BRIGHT}Ejecutando: Iniciar Sesión{Style.RESET_ALL}"
             )
             usuario = Menu.login()
-            Usuario_DAO.ingresar(usuario, Chat)
+            _, rol = Usuario_DAO.ingresar(usuario)
+            if rol == 1:
+                while True:
+                    ManejadorDeOpciones.menu_admin()
+                    break
+            else:
+                catalogo = Herramienta_DAO.listar_herramientas()
+                ciudad, pais = obtener_ubicacion()
+                Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
             return True
         elif option == "2" or option.startswith("<<opción: 2>>"):
             print(
@@ -27,7 +36,9 @@ class ManejadorDeOpciones:
             catalogo = Herramienta_DAO.listar_herramientas()
             ciudad, pais = obtener_ubicacion()
             Menu.menu_usuario(usuario)
-            Chat.chat_interactivo(usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais)
+            Chat.chat_interactivo(
+                usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais
+            )
             return True
         elif option == "3" or option.startswith("<<opción: 3>>"):
             print(
@@ -75,7 +86,10 @@ class ManejadorDeOpciones:
                             from models.Ticket import Ticket
                             from datetime import datetime
 
-                            herramienta = next((h for h in herramientas
+                            herramienta = next(
+                                (
+                                    h
+                                    for h in herramientas
                                     if str(h.id_herramienta) == id_herramienta
                                 ),
                                 None,
@@ -256,25 +270,25 @@ class ManejadorDeOpciones:
                             )
                         else:
                             for usuario in usuarios:
-                                print(usuario)
+                                print(f"\n{Fore.WHITE}{Style.BRIGHT}{usuario}{Style.RESET_ALL}")
                     elif subopcion == 2:
                         # Registrar usuario admin
                         print(
                             f"{Fore.CYAN}Registrar nuevo usuario admin:{Style.RESET_ALL}"
                         )
-                        nombre = input("Nombre: ")
-                        apellido = input("Apellido: ")
-                        email = input("Email: ")
-                        contrasenia = input("Contraseña: ")
+                        nombre = input("Nombre: ").strip()
+                        apellido = input("Apellido: ").strip()
+                        email = input("Email: ").strip()
+                        contrasenia = input("Contraseña: ").strip()
                         usuario_admin = usuario(nombre, apellido, email, contrasenia, 1)
                         Usuario_DAO.crear_usuario(usuario_admin)
                     elif subopcion == 3:
                         # Eliminar usuario
-                        id_usuario = input("Ingrese el ID del usuario a eliminar: ")
+                        id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a eliminar: {Style.RESET_ALL}")
                         Usuario_DAO.eliminar_usuario(id_usuario)
                     elif subopcion == 4:
                         # Modificar usuario
-                        id_usuario = input("Ingrese el ID del usuario a modificar: ")
+                        id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}")
                         # Aquí puedes pedir los nuevos datos y llamar a Usuario_DAO.actualizar_usuario(...)
                         print("Funcionalidad de modificar usuario aún no implementada.")
                     elif subopcion == 5:
