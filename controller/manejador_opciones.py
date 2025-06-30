@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+from models import Usuario
 from styles.Menu import Menu
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
@@ -280,17 +281,17 @@ class ManejadorDeOpciones:
                         apellido = input("Apellido: ").strip()
                         email = input("Email: ").strip()
                         contrasenia = input("Contraseña: ").strip()
-                        usuario_admin = usuario(nombre, apellido, email, contrasenia, 1)
+                        usuario_admin = Usuario(nombre, apellido, email, contrasenia, 1)
                         Usuario_DAO.crear_usuario(usuario_admin)
                     elif subopcion == 3:
                         # Eliminar usuario
                         id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a eliminar: {Style.RESET_ALL}")
-                        Usuario_DAO.eliminar_usuario(id_usuario)
+                        Usuario_DAO.eliminar_usuario(usuario=Usuario(id_usuario=id_usuario))
                     elif subopcion == 4:
                         # Modificar usuario
                         id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}")
-                        # Aquí puedes pedir los nuevos datos y llamar a Usuario_DAO.actualizar_usuario(...)
-                        print("Funcionalidad de modificar usuario aún no implementada.")
+                        # Actualizar usuario
+                        Usuario_DAO.actualizar_usuario(usuario)
                     elif subopcion == 5:
                         print(
                             f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}"

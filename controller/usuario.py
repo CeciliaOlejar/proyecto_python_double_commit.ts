@@ -91,6 +91,7 @@ class Usuario_DAO:
                     print(
                         textwrap.dedent(f"{Fore.YELLOW}{Style.BRIGHT}Has ingresado a ConstruRent como: {usuario}{Style.RESET_ALL}"
                     ))
+                    print("")
                     cls.set_usuario_actual(usuario)
                     return usuario, usuario.rol # Salir del bucle si el usuario es válido
         except Exception as e:
@@ -154,20 +155,19 @@ class Usuario_DAO:
             print(f"Error al actualizar usuario: {e}")
 
     @classmethod
-    def eliminar_usuario(cls, id_usuario: int):
+    def eliminar_usuario(cls, usuario: Usuario):
         """Elimina un usuario de la base de datos por su ID."""
         try:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
                 cursor.execute(
-                    "SELECT nombre FROM usuario WHERE id_usuario=%s", (str(id_usuario),)
+                    "SELECT nombre FROM usuario WHERE id_usuario=%s", (str(usuario.id_usuario),)
                 )
-                usuario = cursor.fetchone()
-                if not usuario:
-                    print(f"Usuario inexistente: {usuario}")
+                registro_usuarios = cursor.fetchone()
+                if not registro_usuarios:
+                    print(f"{Fore.YELLOW}Usuario inexistente: {usuario}")
                     return
-                print(usuario)
-                cursor.execute(cls._ELIMINAR_USUARIO, (id_usuario,))
-                print(f"El usuario: {usuario}, se ha eliminado exitosamente.")
+                cursor.execute(cls._ELIMINAR_USUARIO, (usuario.id_usuario,))
+                print(f"{Fore.GREEN}El usuario: {usuario}, se ha eliminado exitosamente.")
         except Exception as e:
             print(f"Error al eliminar usuario: {e}")

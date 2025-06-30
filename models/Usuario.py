@@ -1,3 +1,6 @@
+import textwrap
+from utils.deteccion import detectar_rol
+
 class Usuario:
     def __init__(self, nombre, apellido, email, contrasenia, rol=None, id_usuario=None):
         self.id_usuario = id_usuario
@@ -48,8 +51,10 @@ class Usuario:
         self._rol = rol 
         
     def __str__(self):
-        return f"""
+        return textwrap.dedent(f"""
+        ID: {self.id_usuario}
         Usuario: {self._nombre}
         Apellido: {self._apellido}
         Email: {self._email}
-        """
+        Rol: {detectar_rol(self._rol)}
+        """)
