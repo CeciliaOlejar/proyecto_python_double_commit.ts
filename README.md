@@ -110,29 +110,72 @@ CREATE DATABASE construrent
 -- Crear tabla herramienta
 CREATE TABLE herramienta (
     id_herramienta SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    tipo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    tipo VARCHAR(100),
     descripcion TEXT,
-    marca VARCHAR(50) NOT NULL,
-    modelo VARCHAR(50) NOT NULL,
-    fecha_adquisicion DATE NOT NULL,
-    ubicacion VARCHAR(100) NOT NULL,
-    precio_por_dia DECIMAL(10,2) NOT NULL CHECK (precio_por_dia > 0),
+    marca VARCHAR(100),
+    modelo VARCHAR(100),
+    fecha_adquisicion DATE,
+    ubicacion VARCHAR(150),
     estado VARCHAR(20) DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'Alquilado', 'En Mantenimiento', 'Fuera de Servicio'))
+    precio_por_dia NUMERIC(10, 2)
 );
 ```
 - Crear tabla para usuarios:
 ```sql
 -- Crear tabla usuario
 CREATE TABLE usuario (
-   id_usuario SERIAL PRIMARY KEY,
-   nombre VARCHAR(30) NOT NULL,
-   apellido VARCHAR(30) NOT NULL,
-   email VARCHAR(50) NOT NULL,
-   contrasenia VARCHAR(50) NOT NULL
-   rol NUMERIC NULL
-)
+    id_usuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    contrasenia VARCHAR(255) NOT NULL,
+    rol NUMERIC(2,0) NOT NULL
+);
 ```
+- Crear tabla para tickets:
+```sql
+-- Crear tabla ticket
+CREATE TABLE ticket (
+    idticket SERIAL PRIMARY KEY,
+    id_usuario INTEGER REFERENCES usuario(id_usuario),
+    id_herramienta INTEGER REFERENCES herramienta(id_herramienta),
+    estado_ticket VARCHAR(50),
+    cliente VARCHAR(150),
+    nombre VARCHAR(150),
+    tipo VARCHAR(100),
+    modelo VARCHAR(100),
+    marca VARCHAR(100),
+    descripcion VARCHAR(255),
+    fecha_adquisicion DATE,
+    precio_por_dia NUMERIC(10, 2),
+    ubicacion VARCHAR(150),
+    fecha_inicio DATE,
+    fecha_fin DATE
+);
+```
+- Insertar herramientas basicas iniciales:
+```sql
+-- Opcional, solo se pueden registrar desde un Usuario Admin
+
+INSERT INTO herramienta (
+    nombre,
+    tipo,
+    descripcion,
+    marca,
+    modelo,
+    fecha_adquisicion,
+    ubicacion,
+    precio_por_dia,
+    estado
+) VALUES
+('Taladro Percutor', 'Eléctrica', 'Taladro percutor de 750W para mampostería y metal', 'Bosch', 'GSB-16RE', '2022-05-10', 'Depósito A', 1500.00, 'Disponible'),
+('Amoladora Angular', 'Eléctrica', 'Amoladora de 115mm, 900W', 'Makita', 'GA4530', '2023-01-20', 'Depósito B', 1200.00, 'Disponible'),
+('Cortadora de Cerámica', 'Manual', 'Cortadora de cerámica de 60cm', 'Rubi', 'Star-60', '2021-08-15', 'Depósito A', 800.00, 'Disponible'),
+('Martillo Demoledor', 'Eléctrica', 'Martillo demoledor SDS-Max', 'DeWalt', 'D25899K', '2022-11-05', 'Depósito C', 2500.00, 'Disponible'),
+('Sierra Circular', 'Eléctrica', 'Sierra circular 1600W para madera', 'Black & Decker', 'CS1000', '2023-04-12', 'Depósito B', 1800.00, 'Disponible');
+
+
 
 ### Para la conexión a la BD
 
