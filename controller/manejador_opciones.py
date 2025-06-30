@@ -397,6 +397,6 @@ class ManejadorDeOpciones:
                             f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
                         )
             else:
-                print(f"{Fore.YELLOW}Volviendo al menú de administración{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}Volviendo al menú de principal{Style.RESET_ALL}")
                 Menu.principal()
                 break
