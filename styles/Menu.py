@@ -182,5 +182,3 @@ class Menu:
         ╚══════════════════════════════════════════════════════╝
         {Style.RESET_ALL}""")
         consola(text)
-        opcion = input(f"{Fore.YELLOW}Selecciona una opción (1-2): {Style.RESET_ALL}")
-        return int(opcion)
