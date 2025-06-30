@@ -41,6 +41,7 @@ class ManejadorDeOpciones:
             Chat.chat_interactivo(
                 usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais
             )
+            Menu.menu_usuario(usuario)
             return True
         elif option == "3" or option.startswith("<<opción: 3>>"):
             print(
