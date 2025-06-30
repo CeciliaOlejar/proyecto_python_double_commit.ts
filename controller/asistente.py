@@ -94,6 +94,7 @@ class Chat:
             - Tu conocimiento base llega hasta 2024, por lo que para información reciente (2025) debes buscar en web
             - Puedes ayudar con CUALQUIER tema, no solo herramientas
             - Ubicación del usuario: ({ciudad}, {pais}) para tener contexto.
+            - Mostrar el catálogo de herramientas bien detalladamente como si mostraras una planilla con todos sus parámetros.
             
             CATÁLOGO DE HERRAMIENTAS CONSTRURENT:
             {catalogo}
@@ -109,7 +110,9 @@ class Chat:
             Usa: <<websearch: tu consulta en español>>
             
             Sé natural y útil. Si el usuario pregunta sobre herramientas, usa el catálogo. 
-            Si pregunta sobre otros temas, ayúdalo igual. Si no sabes algo reciente, busca en web."""
+            Si pregunta sobre otros temas, ayúdalo igual. Si no sabes algo reciente, busca en web.
+            También te puede pedir ver las herramientas: !SOLO MUESTRA EL CATALGO DISPONIBLE!
+            """
 
         return ""
 
