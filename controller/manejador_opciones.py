@@ -8,6 +8,7 @@ from controller.ticket import Ticket_DAO
 from utils.ubicacion import obtener_ubicacion
 import asyncio
 
+
 class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
 
@@ -77,6 +78,7 @@ class ManejadorDeOpciones:
                                 f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                             )
                             break
+
                         # id_herramienta = input(
                         #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
                         # )
@@ -135,112 +137,112 @@ class ManejadorDeOpciones:
                                 f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
                             )
                             break
-                        break
+                        continue
                     if salir_menu_explorar:
                         print(
                             f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
                         )
                         break
                     # buscar herramientas por nombre
-                    elif subopcion == 2 or "2":
-                        salir_menu_explorar = False
-                        nombre = input(
-                            f"{Fore.YELLOW}{Style.BRIGHT}Ingrese el nombre de la herramienta: {Style.RESET_ALL}"
-                        )
-                        resultados = Herramienta_DAO.buscar_por_nombre(nombre)
-                        if not resultados:
-                            print(
-                                f"{Fore.YELLOW}{Style.BRIGHT}No se encontraron herramientas con ese nombre.{Style.RESET_ALL}"
-                            )
-                            continue
+                elif subopcion == 2 or "2":
+                    salir_menu_explorar = False
+                    nombre = input(
+                        f"{Fore.YELLOW}{Style.BRIGHT}Ingrese el nombre de la herramienta: {Style.RESET_ALL}"
+                    )
+                    resultados = Herramienta_DAO.buscar_por_nombre(nombre)
+                    if not resultados:
                         print(
-                            f"{Fore.WHITE}{Style.BRIGHT}Resultados de búsqueda:{Style.RESET_ALL}"
+                            f"{Fore.YELLOW}{Style.BRIGHT}No se encontraron herramientas con ese nombre.{Style.RESET_ALL}"
                         )
-                        for herramienta in resultados:
-                            print(herramienta)
-                            reservar = input(
-                                f"{Fore.GREEN}¿Desea reservar alguna herramienta? (s/n): {Style.RESET_ALL}"
-                            ).lower()
-                        if reservar in ["s", "si", "yes", "y"]:
-                            print(
-                                f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
-                            )
-                            break
-                            # id_herramienta = input(
-                            #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
-                            # )
-                            # usuario_actual = Usuario_DAO.obtener_usuario_actual()
-                            # if not usuario_actual:
-                            #     print(
-                            #         f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
-                            #     )
-                            #     salir_menu_explorar = True
-                            #     break
-                            # fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
-                            # fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
-                            # from models.Ticket import Ticket
-                            # from datetime import datetime
-
-                            # herramienta = next(
-                            #     (
-                            #         h
-                            #         for h in herramientas
-                            #         if str(h.id_herramienta) == id_herramienta
-                            #     ),
-                            #     None,
-                            # )
-                            # if herramienta:
-                            #     ticket = Ticket(
-                            #         herramienta.id_herramienta,
-                            #         herramienta.nombre,
-                            #         herramienta.tipo,
-                            #         herramienta.descripcion,
-                            #         herramienta.marca,
-                            #         herramienta.modelo,
-                            #         herramienta.fecha_adquisicion,
-                            #         herramienta.ubicacion,
-                            #         herramienta.precio_por_dia,
-                            #         herramienta.estado,
-                            #         cliente=usuario_actual,
-                            #         fecha_inicio=datetime.strptime(
-                            #             fecha_inicio, "%Y-%m-%d"
-                            #         ),
-                            #         fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
-                            #     )
-                            #     print(
-                            #         f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
-                            #     )
-                            #     print(ticket)
-                            #     from controller.ticket import Ticket_DAO
-
-                            #     Ticket_DAO.crear_ticket(ticket)
-                            # else:
-                            #     print(
-                            #         f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
-                            #     )
-                        elif reservar in ["n", "no", "nope", "nada"]:
-                            print(
-                                f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
-                            )
-                            break
-                        break
-                    if salir_menu_explorar:
+                        continue
+                    print(
+                        f"{Fore.WHITE}{Style.BRIGHT}Resultados de búsqueda:{Style.RESET_ALL}"
+                    )
+                    for herramienta in resultados:
+                        print(herramienta)
+                        reservar = input(
+                            f"{Fore.GREEN}¿Desea reservar alguna herramienta? (s/n): {Style.RESET_ALL}"
+                        ).lower()
+                    if reservar in ["s", "si", "yes", "y"]:
                         print(
-                            f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
+                            f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                         )
                         break
+                        # id_herramienta = input(
+                        #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
+                        # )
+                        # usuario_actual = Usuario_DAO.obtener_usuario_actual()
+                        # if not usuario_actual:
+                        #     print(
+                        #         f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
+                        #     )
+                        #     salir_menu_explorar = True
+                        #     break
+                        # fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
+                        # fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
+                        # from models.Ticket import Ticket
+                        # from datetime import datetime
 
-                    # volver al menú principal
-                    elif subopcion == 3:
+                        # herramienta = next(
+                        #     (
+                        #         h
+                        #         for h in herramientas
+                        #         if str(h.id_herramienta) == id_herramienta
+                        #     ),
+                        #     None,
+                        # )
+                        # if herramienta:
+                        #     ticket = Ticket(
+                        #         herramienta.id_herramienta,
+                        #         herramienta.nombre,
+                        #         herramienta.tipo,
+                        #         herramienta.descripcion,
+                        #         herramienta.marca,
+                        #         herramienta.modelo,
+                        #         herramienta.fecha_adquisicion,
+                        #         herramienta.ubicacion,
+                        #         herramienta.precio_por_dia,
+                        #         herramienta.estado,
+                        #         cliente=usuario_actual,
+                        #         fecha_inicio=datetime.strptime(
+                        #             fecha_inicio, "%Y-%m-%d"
+                        #         ),
+                        #         fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
+                        #     )
+                        #     print(
+                        #         f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
+                        #     )
+                        #     print(ticket)
+                        #     from controller.ticket import Ticket_DAO
+
+                        #     Ticket_DAO.crear_ticket(ticket)
+                        # else:
+                        #     print(
+                        #         f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
+                        #     )
+                    elif reservar in ["n", "no", "nope", "nada"]:
                         print(
-                            f"{Fore.YELLOW}{Style.BRIGHT}Volviendo al menú principal...{Style.RESET_ALL}"
+                            f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
                         )
                         break
-                    else:
-                        print(
-                            f"{Fore.RED}{Style.BRIGHT}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
-                        )
-                return True
+                    break
+                if salir_menu_explorar:
+                    print(
+                        f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}"
+                    )
+                    break
+
+                # volver al menú principal
+                elif subopcion == 3:
+                    print(
+                        f"{Fore.YELLOW}{Style.BRIGHT}Volviendo al menú principal...{Style.RESET_ALL}"
+                    )
+                    break
+                else:
+                    print(
+                        f"{Fore.RED}{Style.BRIGHT}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
+                    )
+            return True
 
         elif option == "4" or option.startswith("<<opción: 4>>"):
             print(
@@ -281,7 +283,9 @@ class ManejadorDeOpciones:
                             )
                         else:
                             for usuario in usuarios:
-                                print(f"\n{Fore.WHITE}{Style.BRIGHT}{usuario}{Style.RESET_ALL}")
+                                print(
+                                    f"\n{Fore.WHITE}{Style.BRIGHT}{usuario}{Style.RESET_ALL}"
+                                )
                     elif subopcion == 2:
                         # Registrar usuario admin
                         print(
@@ -295,17 +299,23 @@ class ManejadorDeOpciones:
                         Usuario_DAO.crear_usuario(usuario_admin)
                     elif subopcion == 3:
                         # Eliminar usuario
-                        id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a eliminar: {Style.RESET_ALL}")
+                        id_usuario = input(
+                            f"{Fore.YELLOW}Ingrese el ID del usuario a eliminar: {Style.RESET_ALL}"
+                        )
                         Usuario_DAO.eliminar_usuario(id_usuario)
                     elif subopcion == 4:
                         # Modificar usuario
-                        id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}")
+                        id_usuario = input(
+                            f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}"
+                        )
                         nombre = input("Nuevo nombre: ").strip()
                         apellido = input("Nuevo apellido: ").strip()
                         email = input("Nuevo email: ").strip()
                         contrasenia = input("Nueva contraseña: ").strip()
                         rol = int(input("Nuevo rol (1=admin, 2=usuario): ").strip())
-                        usuario_modificado = Usuario(nombre, apellido, email, contrasenia, rol, id_usuario)
+                        usuario_modificado = Usuario(
+                            nombre, apellido, email, contrasenia, rol, id_usuario
+                        )
                         Usuario_DAO.actualizar_usuario(usuario_modificado)
                     elif subopcion == 5:
                         print(
@@ -341,12 +351,15 @@ class ManejadorDeOpciones:
                         descripcion = input("Descripción: ").strip()
                         marca = input("Marca: ").strip()
                         modelo = input("Modelo: ").strip()
-                        fecha_adquisicion = input("Fecha de adquisición (YYYY-MM-DD): ").strip()
+                        fecha_adquisicion = input(
+                            "Fecha de adquisición (YYYY-MM-DD): "
+                        ).strip()
                         ubicacion = input("Ubicación: ").strip()
                         precio_por_dia = float(input("Precio por día: ").strip())
                         estado = input("Estado (disponible, en uso, etc): ").strip()
 
                         from models.Herramienta import Herramienta
+
                         herramienta = Herramienta(
                             nombre=nombre,
                             tipo=tipo,
@@ -356,39 +369,56 @@ class ManejadorDeOpciones:
                             fecha_adquisicion=fecha_adquisicion,
                             ubicacion=ubicacion,
                             precio_por_dia=precio_por_dia,
-                            estado=estado
+                            estado=estado,
                         )
                         Herramienta_DAO.agregar_herramienta(herramienta)
                     elif subopcion == 3:
                         # Eliminar herramienta
-                        id_herramienta = int(input(
-                            "Ingrese el ID de la herramienta a eliminar: "
-                        ))
+                        id_herramienta = int(
+                            input("Ingrese el ID de la herramienta a eliminar: ")
+                        )
                         resultado = Herramienta_DAO.eliminar(id_herramienta)
                         if resultado:
                             rowcount, nombre = resultado
                             if nombre is None:
-                                print(f"{Fore.YELLOW}{Style.BRIGHT}ID de herramienta inexistente {id_herramienta}{Style.RESET_ALL}")
+                                print(
+                                    f"{Fore.YELLOW}{Style.BRIGHT}ID de herramienta inexistente {id_herramienta}{Style.RESET_ALL}"
+                                )
                             elif rowcount > 0:
-                                print(f"{Fore.GREEN}{Style.BRIGHT}Herramienta '{nombre}' eliminada correctamente.{Style.RESET_ALL}")
+                                print(
+                                    f"{Fore.GREEN}{Style.BRIGHT}Herramienta '{nombre}' eliminada correctamente.{Style.RESET_ALL}"
+                                )
                             else:
-                                print(f"{Fore.YELLOW}{Style.BRIGHT}No se eliminó ninguna herramienta.{Style.RESET_ALL}")
+                                print(
+                                    f"{Fore.YELLOW}{Style.BRIGHT}No se eliminó ninguna herramienta.{Style.RESET_ALL}"
+                                )
                         else:
-                            print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error inesperado.{Style.RESET_ALL}")
+                            print(
+                                f"{Fore.RED}{Style.BRIGHT}Ocurrió un error inesperado.{Style.RESET_ALL}"
+                            )
                     elif subopcion == 4:
                         # Modificar herramienta
-                        id_herramienta = int(input("Ingrese el ID de la herramienta a modificar: ").strip())
+                        id_herramienta = int(
+                            input(
+                                "Ingrese el ID de la herramienta a modificar: "
+                            ).strip()
+                        )
                         nombre = input("Nuevo nombre: ").strip()
                         tipo = input("Nuevo tipo: ").strip()
                         descripcion = input("Nueva descripción: ").strip()
                         marca = input("Nueva marca: ").strip()
                         modelo = input("Nuevo modelo: ").strip()
-                        fecha_adquisicion = input("Nueva fecha de adquisición (YYYY-MM-DD): ").strip()
+                        fecha_adquisicion = input(
+                            "Nueva fecha de adquisición (YYYY-MM-DD): "
+                        ).strip()
                         ubicacion = input("Nueva ubicación: ").strip()
                         precio_por_dia = float(input("Nuevo precio por día: ").strip())
-                        estado = input("Nuevo estado (disponible, en uso, etc): ").strip()
+                        estado = input(
+                            "Nuevo estado (disponible, en uso, etc): "
+                        ).strip()
 
                         from models.Herramienta import Herramienta
+
                         herramienta_modificada = Herramienta(
                             nombre=nombre,
                             tipo=tipo,
@@ -399,7 +429,7 @@ class ManejadorDeOpciones:
                             ubicacion=ubicacion,
                             precio_por_dia=precio_por_dia,
                             estado=estado,
-                            id_herramienta=id_herramienta
+                            id_herramienta=id_herramienta,
                         )
                         Herramienta_DAO.actualizar_herramienta(herramienta_modificada)
                     elif subopcion == 5:
