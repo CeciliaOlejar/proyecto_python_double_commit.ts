@@ -4,18 +4,19 @@ from controller.herramienta import Herramienta_DAO
 from db.conexion import Conexion
 
 class Ticket_DAO:
+    _INSERTAR_TICKET = """
+                    INSERT INTO ticket (id_usuario, id_herramienta, estado_ticket, cliente, nombre, tipo, modelo, marca, descripcion,
+                        fecha_adquisicion, precio_por_dia, ubicacion, fecha_fin, fecha_inicio
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
     @classmethod
     def crear_ticket(cls, ticket: Ticket):
         try:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
-                consulta = """
-                    INSERT INTO ticket (id_usuario, id_herramienta, estado_ticket, cliente, nombre, tipo, modelo, marca, descripcion,
-                        fecha_adquisicion, precio_por_dia, ubicacion, fecha_fin, fecha_inicio
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """
+
                 cursor.execute(
-                    consulta,
+                    cls._INSERTAR_TICKET,
                     (
                         ticket.Usuario.id_usuario,      # id_usuario
                         ticket.id_herramienta,           # id_herramienta
@@ -37,3 +38,18 @@ class Ticket_DAO:
                 print(f"Ticket registrado correctamente: {ticket}")
         except Exception as e:
             print(f"Error al registrar ticket: {e}")
+
+    @classmethod
+    def listar_tickets(cls):
+        try:
+            with Conexion.obtener_conexion() as conexion:
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM ticket")
+                resultados = cursor.fetchall()
+                tickets = []
+                for fila in resultados:
+                    tickets.append(Ticket(*fila))
+                return tickets
+        except Exception as e:
+            print(f"Error al listar tickets: {e}")
+            return []
