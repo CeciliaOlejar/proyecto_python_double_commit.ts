@@ -130,17 +130,16 @@ class Herramienta_DAO:
                     "SELECT nombre FROM herramienta WHERE id_herramienta=%s",
                     (id_herramienta,),
                 )
-                id, nombre = cursor.fetchone()
-                if not id:
-                    print(
-                        f"{Fore.YELLOW}{Style.BRIGHT}ID de herramienta inexistente {id_herramienta}{Style.RESET_ALL}"
-                    )
-                    return
+                resultado = cursor.fetchone()
+                if resultado is None:
+                    return 0, None
+                nombre = resultado[0]
                 cursor.execute(cls._ELIMINAR_HERRAMIENTA, (id_herramienta,))
                 return cursor.rowcount, nombre
         except Exception as e:
             print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error {e}{Style.RESET_ALL}")
-
+            return 0, None
+        
     @classmethod
     def buscar_por_nombre(cls, nombre: str) -> list:
         try:

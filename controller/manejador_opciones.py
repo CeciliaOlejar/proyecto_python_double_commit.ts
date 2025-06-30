@@ -355,7 +355,17 @@ class ManejadorDeOpciones:
                         id_herramienta = int(input(
                             "Ingrese el ID de la herramienta a eliminar: "
                         ))
-                        Herramienta_DAO.eliminar(id_herramienta)
+                        resultado = Herramienta_DAO.eliminar(id_herramienta)
+                        if resultado:
+                            rowcount, nombre = resultado
+                            if nombre is None:
+                                print(f"{Fore.YELLOW}{Style.BRIGHT}ID de herramienta inexistente {id_herramienta}{Style.RESET_ALL}")
+                            elif rowcount > 0:
+                                print(f"{Fore.GREEN}{Style.BRIGHT}Herramienta '{nombre}' eliminada correctamente.{Style.RESET_ALL}")
+                            else:
+                                print(f"{Fore.YELLOW}{Style.BRIGHT}No se eliminó ninguna herramienta.{Style.RESET_ALL}")
+                        else:
+                            print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error inesperado.{Style.RESET_ALL}")
                     elif subopcion == 4:
                         # Modificar herramienta
                         id_herramienta = int(input("Ingrese el ID de la herramienta a modificar: ").strip())
