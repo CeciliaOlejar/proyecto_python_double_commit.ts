@@ -73,59 +73,62 @@ class ManejadorDeOpciones:
                             )
                             continue
                         if reservar in ["s", "si", "yes", "y"]:
-                            id_herramienta = input(
-                                f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
+                            print(
+                                f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                             )
-                            usuario_actual = Usuario_DAO.obtener_usuario_actual()
-                            if not usuario_actual:
-                                print(
-                                    f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
-                                )
-                                salir_menu_explorar = True
-                                Menu.principal()
-                                break
-                            fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
-                            fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
-                            from models.Ticket import Ticket
-                            from datetime import datetime
+                        # id_herramienta = input(
+                        #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
+                        # )
+                        # usuario_actual = Usuario_DAO.obtener_usuario_actual()
+                        # if not usuario_actual:
+                        #     print(
+                        #         f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
+                        #     )
+                        #     salir_menu_explorar = True
+                        #     Menu.principal()
+                        #     break
+                        # fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
+                        # fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
+                        # from models.Ticket import Ticket
+                        # from datetime import datetime
 
-                            herramienta = next(
-                                (
-                                    h
-                                    for h in herramientas
-                                    if str(h.id_herramienta) == id_herramienta
-                                ),
-                                None,
-                            )
-                            if herramienta:
-                                ticket = Ticket(
-                                    herramienta.id_herramienta,
-                                    herramienta.nombre,
-                                    herramienta.tipo,
-                                    herramienta.descripcion,
-                                    herramienta.marca,
-                                    herramienta.modelo,
-                                    herramienta.fecha_adquisicion,
-                                    herramienta.ubicacion,
-                                    herramienta.precio_por_dia,
-                                    herramienta.estado,
-                                    cliente=usuario_actual,
-                                    fecha_inicio=datetime.strptime(
-                                        fecha_inicio, "%Y-%m-%d"
-                                    ),
-                                    fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
-                                )
-                                print(
-                                    f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
-                                )
-                                print(ticket)
-                                from controller.ticket import Ticket_DAO
+                        # herramienta = next(
+                        #     (
+                        #         h
+                        #         for h in herramientas
+                        #         if str(h.id_herramienta) == id_herramienta
+                        #     ),
+                        #     None,
+                        # )
+                        # if herramienta:
+                        #     ticket = Ticket(
+                        #         herramienta.id_herramienta,
+                        #         herramienta.nombre,
+                        #         herramienta.tipo,
+                        #         herramienta.descripcion,
+                        #         herramienta.marca,
+                        #         herramienta.modelo,
+                        #         herramienta.fecha_adquisicion,
+                        #         herramienta.ubicacion,
+                        #         herramienta.precio_por_dia,
+                        #         herramienta.estado,
+                        #         cliente=usuario_actual,
+                        #         fecha_inicio=datetime.strptime(
+                        #             fecha_inicio, "%Y-%m-%d"
+                        #         ),
+                        #         fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
+                        #     )
+                        #     print(
+                        #         f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
+                        #     )
+                        #     print(ticket)
+                        #     from controller.ticket import Ticket_DAO
 
-                                Ticket_DAO.crear_ticket(ticket)
-                            else:
-                                print(
-                                    f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
-                                )
+                        #     Ticket_DAO.crear_ticket(ticket)
+                        # else:
+                        #     print(
+                        #         f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
+                        #     )
                         elif reservar == "n":
                             print(
                                 f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
@@ -158,58 +161,61 @@ class ManejadorDeOpciones:
                                 f"{Fore.GREEN}¿Desea reservar alguna herramienta? (s/n): {Style.RESET_ALL}"
                             ).lower()
                         if reservar in ["s", "si", "yes", "y"]:
-                            id_herramienta = input(
-                                f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
+                            print(
+                                f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                             )
-                            usuario_actual = Usuario_DAO.obtener_usuario_actual()
-                            if not usuario_actual:
-                                print(
-                                    f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
-                                )
-                                salir_menu_explorar = True
-                                break
-                            fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
-                            fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
-                            from models.Ticket import Ticket
-                            from datetime import datetime
+                            # id_herramienta = input(
+                            #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
+                            # )
+                            # usuario_actual = Usuario_DAO.obtener_usuario_actual()
+                            # if not usuario_actual:
+                            #     print(
+                            #         f"{Fore.RED}Debe iniciar sesión para reservar herramientas.{Style.RESET_ALL}"
+                            #     )
+                            #     salir_menu_explorar = True
+                            #     break
+                            # fecha_inicio = input("Fecha de inicio (YYYY-MM-DD): ")
+                            # fecha_fin = input("Fecha de fin (YYYY-MM-DD): ")
+                            # from models.Ticket import Ticket
+                            # from datetime import datetime
 
-                            herramienta = next(
-                                (
-                                    h
-                                    for h in herramientas
-                                    if str(h.id_herramienta) == id_herramienta
-                                ),
-                                None,
-                            )
-                            if herramienta:
-                                ticket = Ticket(
-                                    herramienta.id_herramienta,
-                                    herramienta.nombre,
-                                    herramienta.tipo,
-                                    herramienta.descripcion,
-                                    herramienta.marca,
-                                    herramienta.modelo,
-                                    herramienta.fecha_adquisicion,
-                                    herramienta.ubicacion,
-                                    herramienta.precio_por_dia,
-                                    herramienta.estado,
-                                    cliente=usuario_actual,
-                                    fecha_inicio=datetime.strptime(
-                                        fecha_inicio, "%Y-%m-%d"
-                                    ),
-                                    fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
-                                )
-                                print(
-                                    f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
-                                )
-                                print(ticket)
-                                from controller.ticket import Ticket_DAO
+                            # herramienta = next(
+                            #     (
+                            #         h
+                            #         for h in herramientas
+                            #         if str(h.id_herramienta) == id_herramienta
+                            #     ),
+                            #     None,
+                            # )
+                            # if herramienta:
+                            #     ticket = Ticket(
+                            #         herramienta.id_herramienta,
+                            #         herramienta.nombre,
+                            #         herramienta.tipo,
+                            #         herramienta.descripcion,
+                            #         herramienta.marca,
+                            #         herramienta.modelo,
+                            #         herramienta.fecha_adquisicion,
+                            #         herramienta.ubicacion,
+                            #         herramienta.precio_por_dia,
+                            #         herramienta.estado,
+                            #         cliente=usuario_actual,
+                            #         fecha_inicio=datetime.strptime(
+                            #             fecha_inicio, "%Y-%m-%d"
+                            #         ),
+                            #         fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
+                            #     )
+                            #     print(
+                            #         f"{Fore.GREEN}¡Reserva realizada! Aquí está tu ticket:{Style.RESET_ALL}"
+                            #     )
+                            #     print(ticket)
+                            #     from controller.ticket import Ticket_DAO
 
-                                Ticket_DAO.crear_ticket(ticket)
-                            else:
-                                print(
-                                    f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
-                                )
+                            #     Ticket_DAO.crear_ticket(ticket)
+                            # else:
+                            #     print(
+                            #         f"{Fore.RED}ID de herramienta no válido.{Style.RESET_ALL}"
+                            #     )
                         elif reservar in ["n", "no", "nope", "nada"]:
                             print(
                                 f"{Fore.YELLOW}Volviendo al menú de herramientas...{Style.RESET_ALL}"
@@ -337,7 +343,7 @@ class ManejadorDeOpciones:
                         ubicacion = input("Ubicación: ").strip()
                         precio_por_dia = float(input("Precio por día: ").strip())
                         estado = input("Estado (disponible, en uso, etc): ").strip()
-                    
+
                         from models.Herramienta import Herramienta
                         herramienta = Herramienta(
                             nombre=nombre,
@@ -379,7 +385,7 @@ class ManejadorDeOpciones:
                         ubicacion = input("Nueva ubicación: ").strip()
                         precio_por_dia = float(input("Nuevo precio por día: ").strip())
                         estado = input("Nuevo estado (disponible, en uso, etc): ").strip()
-                    
+
                         from models.Herramienta import Herramienta
                         herramienta_modificada = Herramienta(
                             nombre=nombre,
