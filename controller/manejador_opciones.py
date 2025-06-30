@@ -398,3 +398,5 @@ class ManejadorDeOpciones:
                         )
             else:
                 print(f"{Fore.YELLOW}Volviendo al menú de administración{Style.RESET_ALL}")
+                Menu.principal()
+                break
