@@ -290,8 +290,13 @@ class ManejadorDeOpciones:
                     elif subopcion == 4:
                         # Modificar usuario
                         id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}")
-                        # Actualizar usuario
-                        Usuario_DAO.actualizar_usuario(usuario)
+                        nombre = input("Nuevo nombre: ").strip()
+                        apellido = input("Nuevo apellido: ").strip()
+                        email = input("Nuevo email: ").strip()
+                        contrasenia = input("Nueva contraseña: ").strip()
+                        rol = int(input("Nuevo rol (1=admin, 2=usuario): ").strip())
+                        usuario_modificado = Usuario(nombre, apellido, email, contrasenia, rol, id_usuario)
+                        Usuario_DAO.actualizar_usuario(usuario_modificado)
                     elif subopcion == 5:
                         print(
                             f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}"
