@@ -76,6 +76,7 @@ class ManejadorDeOpciones:
                             print(
                                 f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                             )
+                            break
                         # id_herramienta = input(
                         #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
                         # )
@@ -164,6 +165,7 @@ class ManejadorDeOpciones:
                             print(
                                 f"{Fore.RED}Estamos desarrollando esta mejora.{Style.RESET_ALL}"
                             )
+                            break
                             # id_herramienta = input(
                             #     f"{Fore.YELLOW}Ingrese el ID de la herramienta a reservar: {Style.RESET_ALL}"
                             # )
