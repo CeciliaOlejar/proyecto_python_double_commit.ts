@@ -161,15 +161,15 @@ class Usuario_DAO:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
                 cursor.execute(
-                    "SELECT nombre FROM usuario WHERE id_usuario=%s", (str(id_usuario),)
+                    "SELECT * FROM usuario WHERE id_usuario=%s", (str(id_usuario),)
                 )
                 usuario = cursor.fetchone()
                 if not usuario:
                     print(f"Usuario inexistente: {usuario}")
                     return
                 usuario_eliminado = Usuario(usuario[0], usuario[1], usuario[2], usuario[4], usuario[5])
-                print(usuario_eliminado)
+                print(f"{Fore.GREEN}{Style.BRIGHT}\nEl usuario: {usuario_eliminado}{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}{Style.BRIGHT}Se ha eliminado {cursor.rowcount} registro/s exitosamente")
                 cursor.execute(cls._ELIMINAR_USUARIO, (id_usuario,))
-                print(f"El usuario: {usuario_eliminado}, se ha eliminado exitosamente.")
         except Exception as e:
             print(f"Error al eliminar usuario: {e}")
