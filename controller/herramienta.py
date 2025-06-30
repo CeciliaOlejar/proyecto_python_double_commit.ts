@@ -6,19 +6,20 @@ from colorama import Fore, Style
 class Herramienta_DAO:
     _SELECCIONAR_HERRAMIENTAS = "SELECT * FROM herramienta ORDER BY id_herramienta"
     _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    _ACTUALIZAR_HERRAMIENTA = """
-    UPDATE herramienta
-    SET nombre=%s,
-        tipo=%s,
-        descripcion=%s,
-        marca=%s,
-        modelo=%s,
-        fecha_adquisicion=%s,
-        ubicacion=%s,
-        precio_por_dia=%s,
-        estado=%s
-    WHERE id_herramienta=%s
-    """
+    _ACTUALIZAR_HERRAMIENTA = (
+        "UPDATE herramienta SET "
+        "nombre=%s, "
+        "tipo=%s, "
+        "descripcion=%s, "
+        "marca=%s, "
+        "modelo=%s, "
+        "fecha_adquisicion=%s, "
+        "ubicacion=%s, "
+        "precio_por_dia=%s, "
+        "estado=%s "
+        "WHERE id_herramienta=%s"
+    )
+
     _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
     @classmethod
