@@ -385,7 +385,6 @@ class ManejadorDeOpciones:
                     elif subopcion == 4:
                         # Modificar ticket
                         id_ticket = input("Ingrese el ID del ticket a modificar: ")
-                        # Aquí puedes pedir los nuevos datos y llamar a Ticket_DAO.actualizar_ticket(...)
                         print("Funcionalidad de modificar ticket aún no implementada.")
                     elif subopcion == 5:
                         print(
