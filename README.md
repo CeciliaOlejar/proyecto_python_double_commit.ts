@@ -136,6 +136,7 @@ CREATE TABLE usuario (
 
 Crearemos un archivo `.env` con las siguientes variables de entorno:
 - Esto nos sirve para que no se suban nuestras claves importantes y no nos `hard-codeen` nuestras APIS_KEY 😨..
+- Siempre y cuando hayamos ignorado en nuestro hermoso `.gitignore` los `.env` o `.env.*`
 ```bash
 COHERE_API_KEY="<<TU_API_KEY_DE_COHERE>>"
 DB_USER="<<TU_USUARIO_DE_BASE_DE_DATOS>>"
