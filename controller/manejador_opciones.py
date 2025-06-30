@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 from models.Usuario import Usuario
+from models.Herramienta import Herramienta
 from styles.Menu import Menu
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
@@ -326,25 +327,62 @@ class ManejadorDeOpciones:
                         print(
                             f"{Fore.CYAN}Registrar nueva herramienta:{Style.RESET_ALL}"
                         )
-                        # Aquí puedes pedir los datos y llamar a Herramienta_DAO.crear_herramienta(...)
-                        print(
-                            "Funcionalidad de registrar herramienta aún no implementada."
+                        nombre = input("Nombre: ").strip()
+                        tipo = input("Tipo: ").strip()
+                        descripcion = input("Descripción: ").strip()
+                        marca = input("Marca: ").strip()
+                        modelo = input("Modelo: ").strip()
+                        fecha_adquisicion = input("Fecha de adquisición (YYYY-MM-DD): ").strip()
+                        ubicacion = input("Ubicación: ").strip()
+                        precio_por_dia = float(input("Precio por día: ").strip())
+                        estado = input("Estado (disponible, en uso, etc): ").strip()
+                    
+                        from models.Herramienta import Herramienta
+                        herramienta = Herramienta(
+                            nombre=nombre,
+                            tipo=tipo,
+                            descripcion=descripcion,
+                            marca=marca,
+                            modelo=modelo,
+                            fecha_adquisicion=fecha_adquisicion,
+                            ubicacion=ubicacion,
+                            precio_por_dia=precio_por_dia,
+                            estado=estado
                         )
+                        Herramienta_DAO.agregar_herramienta(herramienta)
                     elif subopcion == 3:
                         # Eliminar herramienta
-                        id_herramienta = input(
+                        id_herramienta = int(input(
                             "Ingrese el ID de la herramienta a eliminar: "
-                        )
+                        ))
                         Herramienta_DAO.eliminar(id_herramienta)
                     elif subopcion == 4:
                         # Modificar herramienta
-                        id_herramienta = input(
-                            "Ingrese el ID de la herramienta a modificar: "
+                        id_herramienta = int(input("Ingrese el ID de la herramienta a modificar: ").strip())
+                        nombre = input("Nuevo nombre: ").strip()
+                        tipo = input("Nuevo tipo: ").strip()
+                        descripcion = input("Nueva descripción: ").strip()
+                        marca = input("Nueva marca: ").strip()
+                        modelo = input("Nuevo modelo: ").strip()
+                        fecha_adquisicion = input("Nueva fecha de adquisición (YYYY-MM-DD): ").strip()
+                        ubicacion = input("Nueva ubicación: ").strip()
+                        precio_por_dia = float(input("Nuevo precio por día: ").strip())
+                        estado = input("Nuevo estado (disponible, en uso, etc): ").strip()
+                    
+                        from models.Herramienta import Herramienta
+                        herramienta_modificada = Herramienta(
+                            nombre=nombre,
+                            tipo=tipo,
+                            descripcion=descripcion,
+                            marca=marca,
+                            modelo=modelo,
+                            fecha_adquisicion=fecha_adquisicion,
+                            ubicacion=ubicacion,
+                            precio_por_dia=precio_por_dia,
+                            estado=estado,
+                            id_herramienta=id_herramienta
                         )
-                        # Aquí puedes pedir los nuevos datos y llamar a Herramienta_DAO.actualizar_herramienta(...)
-                        print(
-                            "Funcionalidad de modificar herramienta aún no implementada."
-                        )
+                        Herramienta_DAO.actualizar_herramienta(herramienta_modificada)
                     elif subopcion == 5:
                         print(
                             f"{Fore.YELLOW}Volviendo al menú de administración...{Style.RESET_ALL}"

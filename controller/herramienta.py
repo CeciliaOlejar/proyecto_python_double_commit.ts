@@ -5,8 +5,20 @@ from colorama import Fore, Style
 
 class Herramienta_DAO:
     _SELECCIONAR_HERRAMIENTAS = "SELECT * FROM herramienta ORDER BY id_herramienta"
-    _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado) VALUES (%s,%s,%s,%s)"
-    _ACTUALIZAR_HERRAMIENTA = "UPDATE herramienta SET nombre=%s tipo=%s descripcion=%s marca=%s modelo=%s fecha_adquisicion=%s ubicacion=%s precio_por_dia=%s estado=%s"
+    _INSERTAR_HERRAMIENTA = "INSERT INTO herramienta(nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    _ACTUALIZAR_HERRAMIENTA = """
+    UPDATE herramienta
+    SET nombre=%s,
+        tipo=%s,
+        descripcion=%s,
+        marca=%s,
+        modelo=%s,
+        fecha_adquisicion=%s,
+        ubicacion=%s,
+        precio_por_dia=%s,
+        estado=%s
+    WHERE id_herramienta=%s
+    """
     _ELIMINAR_HERRAMIENTA = "DELETE FROM herramienta WHERE id_herramienta=%s"
 
     @classmethod
@@ -19,7 +31,6 @@ class Herramienta_DAO:
                 herramientas = []
                 for registro in registros:
                     herramienta = Herramienta(
-                        registro[0],
                         registro[1],
                         registro[2],
                         registro[3],
@@ -29,6 +40,7 @@ class Herramienta_DAO:
                         registro[7],
                         registro[8],
                         registro[9],
+                        registro[0],
                     )
                     herramientas.append(herramienta)
                 return herramientas
@@ -77,14 +89,14 @@ class Herramienta_DAO:
                     f"{Fore.GREEN}{Style.BRIGHT}Se ha agregado la siguiente herramienta:{Style.RESET_ALL}"
                 )
                 print(
-                    f"{Fore.WHITE}{Style.BRIGHT}{Herramienta.__str__()}{Style.RESET_ALL}"
+                    f"{Fore.WHITE}{Style.BRIGHT}{herramienta}{Style.RESET_ALL}"
                 )
                 return cursor.lastrowid
         except Exception as e:
             print(f"Error al agregar herramienta: {e}")
 
     @classmethod
-    def actualizar_herrmienta(cls, herramienta: Herramienta):
+    def actualizar_herramienta(cls, herramienta: Herramienta):
         try:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
@@ -100,8 +112,11 @@ class Herramienta_DAO:
                         herramienta.ubicacion,
                         herramienta.precio_por_dia,
                         herramienta.estado,
+                        herramienta.id_herramienta,
                     ),
                 )
+                conexion.commit()
+                print(f"{Fore.GREEN}{Style.BRIGHT}Herramienta actualizada correctamente.{Style.RESET_ALL}")
         except Exception as e:
             print(f"{Fore.RED}{Style.BRIGHT}Ocurrió un error {e}{Style.RESET_ALL}")
 
