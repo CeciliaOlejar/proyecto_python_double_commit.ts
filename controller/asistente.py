@@ -9,6 +9,7 @@ from utils.ubicacion import obtener_ubicacion
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 from styles.Menu import Menu
+import asyncio
 
 init()
 # El decorador @dataclass en Python se utiliza para simplificar la creación de clases que son principalmente contenedores de datos
@@ -222,7 +223,7 @@ class Chat:
     @staticmethod
     def asistente_bienvenida() -> None:
         """Inicia el asistente de bienvenida"""
-        ciudad, pais = obtener_ubicacion()
+        ciudad, pais = asyncio.run(obtener_ubicacion())
         catalogo = Herramienta_DAO.listar_herramientas()
         config = ConfiguracionChat(
             mensaje_sistema=Chat._crear_mensaje_sistema(
@@ -252,7 +253,7 @@ class Chat:
             ),
             habilitar_busqueda_web=True,
         )
-        Chat.chat_base(config, nombre_usuario=nombre_usuario)
+        Chat.chat_base(config)
 
     # Mantener compatibilidad con el método anterior
     @staticmethod

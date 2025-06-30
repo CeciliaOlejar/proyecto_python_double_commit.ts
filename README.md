@@ -127,6 +127,7 @@ CREATE TABLE usuario (
    apellido VARCHAR(30) NOT NULL,
    email VARCHAR(50) NOT NULL,
    contrasenia VARCHAR(50) NOT NULL
+   rol NUMERIC NULL
 )
 ```
 

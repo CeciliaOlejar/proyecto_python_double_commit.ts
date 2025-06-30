@@ -155,19 +155,21 @@ class Usuario_DAO:
             print(f"Error al actualizar usuario: {e}")
 
     @classmethod
-    def eliminar_usuario(cls, usuario: Usuario):
+    def eliminar_usuario(cls, id_usuario: int):
         """Elimina un usuario de la base de datos por su ID."""
         try:
             with Conexion.obtener_conexion() as conexion:
                 cursor = conexion.cursor()
                 cursor.execute(
-                    "SELECT nombre FROM usuario WHERE id_usuario=%s", (str(usuario.id_usuario),)
+                    "SELECT nombre FROM usuario WHERE id_usuario=%s", (str(id_usuario),)
                 )
-                registro_usuarios = cursor.fetchone()
-                if not registro_usuarios:
-                    print(f"{Fore.YELLOW}Usuario inexistente: {usuario}")
+                usuario = cursor.fetchone()
+                if not usuario:
+                    print(f"Usuario inexistente: {usuario}")
                     return
-                cursor.execute(cls._ELIMINAR_USUARIO, (usuario.id_usuario,))
-                print(f"{Fore.GREEN}El usuario: {usuario}, se ha eliminado exitosamente.")
+                usuario_eliminado = Usuario(usuario[0], usuario[1], usuario[2], usuario[4], usuario[5])
+                print(usuario_eliminado)
+                cursor.execute(cls._ELIMINAR_USUARIO, (id_usuario,))
+                print(f"El usuario: {usuario_eliminado}, se ha eliminado exitosamente.")
         except Exception as e:
             print(f"Error al eliminar usuario: {e}")

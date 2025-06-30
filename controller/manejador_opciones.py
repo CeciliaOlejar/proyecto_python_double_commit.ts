@@ -5,7 +5,7 @@ from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
 from controller.ticket import Ticket_DAO
 from utils.ubicacion import obtener_ubicacion
-
+import asyncio
 
 class ManejadorDeOpciones:
     """Maneja las opciones del menú principal"""
@@ -25,7 +25,7 @@ class ManejadorDeOpciones:
                     break
             else:
                 catalogo = Herramienta_DAO.listar_herramientas()
-                ciudad, pais = obtener_ubicacion()
+                ciudad, pais = asyncio.run(obtener_ubicacion())
                 Chat.iniciar(usuario.nombre, catalogo, ciudad, pais)
             return True
         elif option == "2" or option.startswith("<<opción: 2>>"):
@@ -35,7 +35,7 @@ class ManejadorDeOpciones:
             usuario = Menu.registro()
             Usuario_DAO.crear_usuario(usuario)
             catalogo = Herramienta_DAO.listar_herramientas()
-            ciudad, pais = obtener_ubicacion()
+            ciudad, pais = asyncio.run(obtener_ubicacion())
             Menu.menu_usuario(usuario)
             Chat.chat_interactivo(
                 usuario.nombre, catalogo=catalogo, ciudad=ciudad, pais=pais
@@ -240,7 +240,7 @@ class ManejadorDeOpciones:
                 f"{Fore.GREEN}{Style.BRIGHT}Escribe tu nombre: {Style.RESET_ALL}"
             )
             catalogo = Herramienta_DAO.listar_herramientas()
-            ciudad, pais = obtener_ubicacion()
+            ciudad, pais = asyncio.run(obtener_ubicacion())
             Chat.chat_interactivo(nombre, catalogo, ciudad, pais)
             return True
         elif option == "5" or 5:
@@ -286,7 +286,7 @@ class ManejadorDeOpciones:
                     elif subopcion == 3:
                         # Eliminar usuario
                         id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a eliminar: {Style.RESET_ALL}")
-                        Usuario_DAO.eliminar_usuario(usuario=Usuario(id_usuario=id_usuario))
+                        Usuario_DAO.eliminar_usuario(id_usuario)
                     elif subopcion == 4:
                         # Modificar usuario
                         id_usuario = input(f"{Fore.YELLOW}Ingrese el ID del usuario a modificar: {Style.RESET_ALL}")
