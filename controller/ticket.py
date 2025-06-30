@@ -18,20 +18,20 @@ class Ticket_DAO:
                 cursor.execute(
                     cls._INSERTAR_TICKET,
                     (
-                        ticket.Usuario.id_usuario,      # id_usuario
-                        ticket.id_herramienta,           # id_herramienta
-                        ticket.estado_ticket,           # estado_ticket
-                        ticket.Usuario.nombre,          # cliente
-                        ticket.nombre,                   # nombre
-                        ticket.tipo,                     # tipo
-                        ticket.modelo,                   # modelo
-                        ticket.marca,                    # marca
-                        ticket.descripcion,              # descripcion
-                        ticket.fecha_adquisicion,        # fecha_adquisicion
-                        ticket.precio_por_dia,           # precio_por_dia
-                        ticket.ubicacion,                # ubicacion
-                        ticket.fecha_fin,               # fecha_fin
-                        ticket.fecha_inicio,            # fecha_inicio
+                        ticket.usuario_actual.id_usuario,  # id_usuario
+                        ticket.id_herramienta,  # id_herramienta
+                        ticket.estado_ticket,  # estado_ticket
+                        ticket.usuario_actual.nombre,  # cliente
+                        ticket.nombre,  # nombre
+                        ticket.tipo,  # tipo
+                        ticket.modelo,  # modelo
+                        ticket.marca,  # marca
+                        ticket.descripcion,  # descripcion
+                        ticket.fecha_adquisicion,  # fecha_adquisicion
+                        ticket.precio_por_dia,  # precio_por_dia
+                        ticket.ubicacion,  # ubicacion
+                        ticket.fecha_fin,  # fecha_fin
+                        ticket.fecha_inicio,  # fecha_inicio
                     ),
                 )
                 conexion.commit()
