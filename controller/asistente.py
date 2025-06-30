@@ -70,10 +70,13 @@ class Chat:
             - Preguntar a RentaBot asistente IA (opción 4).
             - Salir de la aplicación (opción 5).
             3. Responder de manera eficiente y amigable cualquier consulta que el usuario tenga.
+            4. Mostrar el catálogo de herramientas bien detalladamente como si mostraras una planilla con todos sus parámetros.
             
             CAPACIDADES:
             El usuario puede que te escriba algunas de las opciones mencionadas en el menú, si esto sucede
-            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar sesión" u "opción 1" o si escribe el número de la opción, etc, responde con <<opción: [opción que corresponda]>>."""
+            usa <<opción: [número de la opción]>>, por ejemplo: si dice "Iniciar sesión" u "opción 1" o si escribe el número de la opción, etc, responde con <<opción: [opción que corresponda]>>.
+            También te puede pedir ver las herramientas: !SOLO MUESTRA EL CATALGO DISPONIBLE!
+            """
 
         elif tipo == "interactivo":
             nombre_usuario = kwargs.get("nombre_usuario", "Usuario")
