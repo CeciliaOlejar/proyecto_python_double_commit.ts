@@ -58,7 +58,7 @@ playwright install
 ```
 
 5. Para poder utilizar el modelo IA es necesario que obtengas tu <<api_key>> gratuita de cohere, en el siguiente link se explica
-que puedes hacer con su modelo, lo recomiendo para que puedan practicar y hacer diferentes tipos de aplicaciones con IA: [Documentación Cohere]("https://docs.cohere.com/reference/about")
+que puedes hacer con su modelo, lo recomiendo para que puedan practicar y hacer diferentes tipos de aplicaciones con IA: [Documentación Cohere](https://docs.cohere.com/reference/about)
 
 ### 📦 Estructura del proyecto
 
