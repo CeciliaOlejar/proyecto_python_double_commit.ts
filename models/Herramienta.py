@@ -2,7 +2,7 @@ import textwrap
 from colorama import Fore, Style
 
 class Herramienta:
-    def __init__(self, id_herramienta, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado="Disponible"):
+    def __init__(self, nombre, tipo, descripcion, marca, modelo, fecha_adquisicion, ubicacion, precio_por_dia, estado="Disponible", id_herramienta = None):
         self._id_herramienta = id_herramienta
         self._nombre = nombre
         self._tipo = tipo
