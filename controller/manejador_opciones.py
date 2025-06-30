@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from models import Usuario
+from models.Usuario import Usuario
 from styles.Menu import Menu
 from controller.usuario import Usuario_DAO
 from controller.herramienta import Herramienta_DAO
