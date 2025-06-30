@@ -13,7 +13,7 @@ class Usuario_DAO:
     INSERT INTO usuario(nombre, apellido, email, contrasenia, rol)
     VALUES (%s, %s, %s, %s, %s)
     """
-    _VERIFICAR_USUARIO = "SELECT id_usuario, nombre, apellido, email, contrasenia, rol FROM usuario WHERE email=%s AND contrasenia=%s"
+    _VERIFICAR_USUARIO = "SELECT * FROM usuario WHERE email=%s AND contrasenia=%s"
 
     _ACTUALIZAR_USUARIO = """
     UPDATE usuario
