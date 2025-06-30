@@ -391,3 +391,5 @@ class ManejadorDeOpciones:
                         print(
                             f"{Fore.RED}Opción no válida. Intenta de nuevo.{Style.RESET_ALL}"
                         )
+            else:
+                print(f"{Fore.YELLOW}Volviendo al menú de administración{Style.RESET_ALL}")
