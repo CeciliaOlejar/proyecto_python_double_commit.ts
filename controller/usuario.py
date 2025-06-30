@@ -167,7 +167,7 @@ class Usuario_DAO:
                 if not usuario:
                     print(f"Usuario inexistente: {usuario}")
                     return
-                usuario_eliminado = Usuario(usuario[0], usuario[1], usuario[2], usuario[3], usuario[5])
+                usuario_eliminado = Usuario(usuario[1], usuario[2], usuario[3], "•••••••", usuario[5], usuario[0])
                 print(f"{Fore.GREEN}{Style.BRIGHT}\nEl usuario: {usuario_eliminado}{Style.RESET_ALL}")
                 print(f"{Fore.GREEN}{Style.BRIGHT}Se ha eliminado {cursor.rowcount} registro/s exitosamente")
                 cursor.execute(cls._ELIMINAR_USUARIO, (id_usuario,))
