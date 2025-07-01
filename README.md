@@ -23,11 +23,9 @@ Aplicación desarrollada en Python puro para gestionar un catálogo de herramien
 - Interfaz por consola (CLI)
 
 
-## Link al Video sobre la app
+## 📼 Link al Video sobre la app
 
 https://drive.google.com/drive/u/1/folders/1VMJW0DNvWXzwmynGQ_Ji_HurUZvVqRkN
-
-
 
 ## 🔧 Instalación
 
