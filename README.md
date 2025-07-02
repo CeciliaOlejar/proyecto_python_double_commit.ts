@@ -74,6 +74,8 @@ proyecto/
 ├── controller/
 │   ├── asistente.py  
 │   ├── herramienta.py
+│   ├── manejador_opciones.py
+│   ├── ticket.py
 │   └── usuario.py
 ├── db/
 │   └── conexion.py
@@ -84,12 +86,15 @@ proyecto/
 ├── styles/
 │   └── Menu.py
 ├── utils/
+│   ├── buscador.py
 │   ├── cohere_config.py
+│   ├── resaltar.py    
 │   ├── efecto.py
 │   ├── resaltar.py
 │   └── ubicacion.py
 ├── venv/*
 ├── .env
+├── .gitignore
 ├── main.py
 ├── requirements.txt
 └── README.md
